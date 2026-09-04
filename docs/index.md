@@ -42,13 +42,14 @@ features:
 
 ## 怎么用这份文档
 
-三页按顺序看，每页都能独立验收：
+四页按顺序看，每页都能独立验收：
 
 | 页面 | 你会得到 | 大概耗时 |
 | --- | --- | --- |
 | [第一步：搭环境](/getting-started/environment) | 一个不污染宿主机的 ROS 2 Humble 容器 | 首次 15~30 分钟 |
 | [第二步：编译工作空间](/ego-planner/build) | 20 个包编译完成，`ros2 pkg list` 能认出来 | 首次 10~20 分钟 |
 | [第三步：跑通单机仿真](/ego-planner/simulation) | 看得见的飞行画面 + 4 项验收 | 首次 20 分钟，之后 2 分钟 |
+| [第四步：读懂源码](/ego-planner/source-reading) | 6390 行 C++ 的阅读路线、状态机全图、两个可回滚的小修改练习 | 读 1~2 小时 |
 
 卡住了就看排错页：[构建期问题](/debugging/docker-build)、[运行期问题](/debugging/ego-runtime)。
 

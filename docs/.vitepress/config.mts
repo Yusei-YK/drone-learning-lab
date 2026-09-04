@@ -21,6 +21,7 @@ export default withMermaid(defineConfig({
     nav: [
       { text: '环境', link: '/getting-started/environment' },
       { text: 'EGO 仿真', link: '/ego-planner/simulation' },
+      { text: '读源码', link: '/ego-planner/source-reading' },
       { text: '排错', link: '/debugging/ego-runtime' }
     ],
     sidebar: [
@@ -36,7 +37,8 @@ export default withMermaid(defineConfig({
         text: 'EGO-Planner',
         items: [
           { text: '第二步：编译工作空间', link: '/ego-planner/build' },
-          { text: '第三步：跑通单机仿真', link: '/ego-planner/simulation' }
+          { text: '第三步：跑通单机仿真', link: '/ego-planner/simulation' },
+          { text: '第四步：读懂源码', link: '/ego-planner/source-reading' }
         ]
       },
       {
