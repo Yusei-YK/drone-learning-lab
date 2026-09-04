@@ -1,0 +1,22 @@
+# Node / VitePress
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# ROS 2 / colcon 产物（体积大且可重建，不入库）
+build/
+install/
+log/
+
+# 数据集、镜像导出、录制包
+*.bag
+*.db3
+*.mcap
+*.tar
+*.tar.gz
+datasets/
+
+# 编辑器与系统
+.DS_Store
+*.swp
+.idea/
