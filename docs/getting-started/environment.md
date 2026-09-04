@@ -245,41 +245,99 @@ Ubuntu 22.04.5 LTS
 
 `--rm` 表示"跑完就删掉这个容器"。验收这种一次性命令都应该加 `--rm`，否则会攒下一堆 `Exited` 的僵尸容器（`sudo docker ps -a` 能看到）。
 
-## 8. 一个方便的交互脚本（可选）
+## 8. 三个脚本把环境固化下来
 
-每次手敲那一长串 `docker run` 很痛苦，可以存成 `docker-run.sh`：
+手敲长命令迟早会漏参数，而漏掉的往往正是踩过坑才加上的那个。`environments/ego-humble/` 下的三个脚本把这些坑固化了，**直接在仓库里运行即可**，不需要抄到别处。
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-root_dir="$(cd "$(dirname "$0")" && pwd)"
-exec sudo --preserve-env=DISPLAY,HTTP_PROXY,HTTPS_PROXY,NO_PROXY,http_proxy,https_proxy,no_proxy \
-  docker run --rm -it \
-  --network host --ipc host \
-  -e DISPLAY -e QT_X11_NO_MITSHM=1 \
-  -e HTTP_PROXY -e HTTPS_PROXY -e NO_PROXY \
-  -e http_proxy -e https_proxy -e no_proxy \
-  -e RMW_IMPLEMENTATION=rmw_cyclonedds_cpp \
-  -v "$root_dir:/workspace" \
-  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-  -w /workspace \
-  local/ego-planner-humble:latest "$@"
-```
+| 脚本 | 干什么 | 幂等吗 |
+| --- | --- | --- |
+| `fetch-source.sh` | 克隆 EGO 源码并**钉死在一个 commit** | 是，已存在就只校验 |
+| `docker-run.sh` | 开一个交互式容器 | 是 |
+| `run-sim.sh` | 起停整套仿真（`start` / `stop` / `status` / `logs`） | 是，`start` 会先清掉同名容器 |
 
-用法：
+### 8.1 `fetch-source.sh`：把上游钉住
 
 ```bash
-./docker-run.sh bash          # 进一个交互 shell
-./docker-run.sh ros2 topic list
+bash environments/ego-humble/fetch-source.sh
 ```
 
-::: danger 这个脚本必须放在工作空间根目录
-`root_dir="$(cd "$(dirname "$0")" && pwd)"` 取的是**脚本自己所在的目录**，并把它挂载成 `/workspace`。所以脚本必须和 `src/`、`install/` 放在一起（本项目是 `/home/yusei/Documents/Codex/ego-humble/`）。
+【运行验证】在已克隆的机器上运行，输出：
 
-本仓库 `environments/ego-humble/` 下的副本只是**留档给你对照抄写**，直接在那里运行会挂错目录，容器里将看不到 EGO 源码。
+```
+工作空间: /home/yusei/Documents/Codex/ego-humble
+目标 commit: 23a8d5a191711dd65633df689bd00f55d4dea8f9
+✅ 已在目标 commit，无需操作。
+```
+
+::: tip 为什么非要钉住 commit
+上游 `ZJU-FAST-Lab/ego-planner-swarm` 随时会更新。如果脚本只写「clone 一下」，别人明天复现出来的就不是同一份代码，**本文档里的所有行号、错误信息、参数都会对不上**。
+
+写死 commit 是「能跑一次」和「可复现」的分界线。**怎么记**：文档引用了行号，就必须锁定版本，否则文档在上游第一次提交后就开始腐烂。
 :::
 
-关于 `sudo --preserve-env=DISPLAY,...`：`sudo` 默认会清空环境变量（安全考虑），所以要显式声明哪些变量允许穿透。`-e DISPLAY`（不带等号和值）的意思是"从当前环境里取同名变量"，两者配合才能把 `DISPLAY=:1` 送进容器。代理那几个变量是构建期留下的，本地跑仿真时没有代理也不影响。
+### 8.2 `docker-run.sh`：交互式容器
+
+```bash
+bash environments/ego-humble/docker-run.sh                    # 进 bash
+bash environments/ego-humble/docker-run.sh ros2 topic list    # 跑一条就退出
+EGO_WORKSPACE=/别的/路径 bash environments/ego-humble/docker-run.sh
+```
+
+::: warning 这里修过一个真实的 bug
+早先版本用 `root_dir="$(cd "$(dirname "$0")" && pwd)"` 当挂载源，也就是**脚本自己所在的目录**。从学习仓库里执行时，它会把 `environments/ego-humble/` 挂成 `/workspace`，容器里根本看不到 EGO 源码。
+
+现在改成从 `EGO_WORKSPACE` 取（默认 `~/Documents/Codex/ego-humble`），并在启动前检查该目录下有没有 `src/`，没有就报错退出。
+
+**怎么记**：`dirname "$0"` 回答的是「脚本在哪」，不是「数据在哪」。这两者不是一回事时，就不能用它。
+:::
+
+脚本里 `sudo --preserve-env=DISPLAY,...` 的作用：`sudo` 默认清空环境变量（安全考虑），所以要显式声明哪些允许穿透。`-e DISPLAY`（不带值）表示「从当前环境取同名变量」，两者配合才能把 `DISPLAY=:1` 送进容器。
+
+它还会自动扫描 `/dev/dri/card*` 和 `/dev/dri/renderD*` 并逐个 `--device` 传进去 —— 漏掉这一步，Mesa 会回落到 `llvmpipe` 软件渲染。
+
+### 8.3 `run-sim.sh`：一条命令起停仿真
+
+```bash
+bash environments/ego-humble/run-sim.sh start
+bash environments/ego-humble/run-sim.sh status
+bash environments/ego-humble/run-sim.sh logs
+bash environments/ego-humble/run-sim.sh stop
+```
+
+【运行验证】`start` 的真实输出：
+
+```
+→ 启动 ego_sim（规划 + 假飞机 + 假地图，日志上限 20m）
+→ 启动 ego_rviz（可视化，带 8 个 GPU 设备参数，日志上限 10m）
+
+✅ 已启动。验收三步：
+   1) bash run-sim.sh status          节点应有 7 个
+   2) 看 RViz 窗口里有没有绿色轨迹在动
+   3) bash run-sim.sh logs            应看到 FSM 状态在变化
+```
+
+`status` 的真实输出（节点 7 个 + GPU 设备确实进到了容器里）：
+
+```
+ego_rviz	Up 29 seconds
+ego_sim	Up 32 seconds
+--- 节点 ---
+/drone_0_ego_planner_node      /drone_0_odom_visualization
+/drone_0_pcl_render_node       /drone_0_poscmd_2_odom
+/drone_0_traj_server           /random_forest              /rviz
+--- GPU 设备是否进到容器里（空 = RViz 会退化成 llvmpipe 软件渲染）---
+card1 card2 renderD128 renderD129
+```
+
+::: tip 脚本里固化了哪三个坑
+| 固化的参数 | 不加会怎样 |
+| --- | --- |
+| `--log-opt max-size / max-file` | 容器日志无上限。我们真实见过它涨到 **6,938,649 行** |
+| `--device /dev/dri/*` | RViz 退化成 `llvmpipe` 软件渲染，卡顿 |
+| `-e DISPLAY="$DISPLAY"`（显式传值） | 依赖 `sudo` 是否保留变量，换机器就可能开不出窗口 |
+
+这就是「环境配好了」的真正含义：**不是我这台机器能跑，而是踩过的坑不会再被漏掉。**
+:::
 
 ## 记忆卡
 

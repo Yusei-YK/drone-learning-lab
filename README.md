@@ -41,15 +41,40 @@ docs/                        VitePress 中文教学文档（网页版源文件�
 │  └─ ego-runtime.md         运行期问题（只记录真实遇到的）
 └─ public/img/               真实终端和 RViz 截图
 
-environments/ego-humble/     环境脚本留档（对照抄写用）
-├─ Dockerfile                ROS 2 Humble + PCL + Armadillo 镜像
+environments/ego-humble/     环境脚本（可直接在仓库里运行，全部幂等）
+├─ Dockerfile                ROS 2 Humble + PCL + Armadillo + 截图工具
 ├─ docker/entrypoint.sh      自动 source ROS 环境
+├─ fetch-source.sh           克隆 EGO 并钉死 commit 23a8d5a
 ├─ build-image.sh            构建镜像
 ├─ build-workspace.sh        rosdep + colcon build
-├─ docker-run.sh             起交互容器（必须放在工作空间根目录才正确）
-├─ capture-shot.sh           截 RViz 窗口（容器内 ImageMagick 方案）
-└─ capture-term.sh           截干净终端输出
+├─ run-sim.sh                起停仿真：start / stop / status / logs
+├─ docker-run.sh             起交互容器（工作空间路径由 EGO_WORKSPACE 决定）
+├─ capture-shot.sh           截 RViz 窗口（容器内 ImageMagick，工具会自愈）
+└─ capture-term.sh           截干净终端输出（拒绝含双引号的命令）
 ```
+
+## 从零复现（四条命令）
+
+前提：Linux + Docker + 一个图形桌面（需要 `DISPLAY`）。详细讲解见[环境页](https://yusei-yk.github.io/drone-learning-lab/getting-started/environment)。
+
+```bash
+# 1. 拉源码并钉死 commit（顺带把 build-workspace.sh 放进工作空间）
+bash environments/ego-humble/fetch-source.sh
+
+# 2. 构建镜像，约 4.84 GB
+bash environments/ego-humble/build-image.sh
+
+# 3. 在容器里 rosdep + colcon build，20 个包
+bash environments/ego-humble/docker-run.sh bash /workspace/build-workspace.sh
+
+# 4. 起仿真并验收（应看到 7 个节点 + 4 个 GPU 设备）
+bash environments/ego-humble/run-sim.sh start
+bash environments/ego-humble/run-sim.sh status
+```
+
+脚本都是幂等的，重复执行不会破坏已有状态。工作空间默认 `~/Documents/Codex/ego-humble`，用 `EGO_WORKSPACE` 可改。
+
+注意第 3 步必须**在容器里**执行 —— `build-workspace.sh` 会 `source /opt/ros/humble/setup.bash`，宿主机上没有 Humble（本机宿主是 ROS 2 Jazzy）。
 
 ## 证据标签
 

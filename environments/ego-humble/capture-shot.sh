@@ -27,6 +27,12 @@ geom=${3:-}
 sudo docker exec -u root "$CONTAINER" bash -lc '
 set -euo pipefail
 mode='"$mode"'; name='"$name"'; geom='"${geom:-}"'; maxw='"$MAXW"'
+# 自愈：容器重建后这些工具会消失。装一次约 20 秒，之后命中缓存。
+# 根治办法是重建镜像（Dockerfile 里已经加了这一层）。
+if ! command -v import >/dev/null 2>&1 || ! command -v xwininfo >/dev/null 2>&1; then
+  echo "→ 容器内缺少截图工具，自动安装一次" >&2
+  apt-get update -qq && apt-get install -y -qq --no-install-recommends imagemagick x11-utils >/dev/null
+fi
 tree=$(xwininfo -root -tree)
 # 顶层 RViz 窗口：标题含 "- RViz"，窗口类是 ("rviz2" "rviz2")
 top=$(printf "%s" "$tree" | grep "(\"rviz2\" \"rviz2\")" | grep -- "- RViz" | awk "{print \$1}" | head -1)
