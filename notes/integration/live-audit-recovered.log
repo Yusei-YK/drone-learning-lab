@@ -1,0 +1,3 @@
+{"stream": "odom", "samples": 358, "arrival_hz": 29.839, "max_arrival_gap_s": 0.0373, "stamp_step_median_s": 0.0323, "frame_id": "map", "child_frame_id": "base_link"}
+{"stream": "imu", "samples": 598, "arrival_hz": 49.743, "max_arrival_gap_s": 0.029, "stamp_step_median_s": 0.02, "frame_id": "base_link"}
+{"stream": "state", "samples": 12, "arrival_hz": 0.995, "max_arrival_gap_s": 1.0066, "connected": true, "armed": false, "mode": "AUTO.LOITER"}

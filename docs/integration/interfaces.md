@@ -1,6 +1,6 @@
 # 第七步：先对齐 EGO → px4ctrl → PX4 接口
 
-**本页完成的是消息适配和接口核对，还不是飞行闭环。** 两个新包的编译及隔离 DDS 测试已通过；实时定位频率、坐标适配和控制器飞行仍待验收。
+**本页完成的是消息适配、实时定位采样和坐标桥接，还不是飞行闭环。** 两个新包的编译、隔离 DDS 测试和桥接节点验证已通过；控制器状态机与飞行仍待验收。
 
 ## 1. 检查：先看数据流，再决定接什么
 
@@ -200,9 +200,71 @@ sudo docker exec -i px4_mavros bash -lc \
 
 脚本仅订阅并记录接收频率、最大间隔、时间戳步长和状态。每个话题至少需要两条消息才能计算频率；后续还要检验端到端延迟、时间戳单调性及暂停/恢复行为。当前最小方案先统一使用宿主机墙钟，不混入 EuRoC `/clock`；使用仿真时间的下一阶段需让整条链统一配置。
 
+如果宿主机刚从一个 Wi-Fi 网络切换到另一个网络，先重建 MAVROS 容器，让 CycloneDDS 重新选择网卡：
+
+```bash
+cd /home/yusei/Documents/Codex/drone-learning-lab
+DDS_INTERFACE=lo bash environments/px4-humble/run-sitl.sh mavros
+```
+
+这只重建 MAVROS，不会重启 PX4 SITL；默认不设置 `DDS_INTERFACE` 时仍使用 CycloneDDS 的默认网卡选择。
+
 **记住：**“配置 100 Hz”“收到一帧”“持续达到 100 Hz”是三种证据。**下一步：**先恢复可重复的只读采样，再做定位桥接。
 
-## 6. 记录与下一步
+## 6. 定位桥接：先证明速度坐标正确
+
+**在做什么：**把 MAVROS Odometry 中的机体系线速度旋转到世界系。**为什么：**MAVROS 的 `pose` 是 ENU 世界系，但 `twist.linear` 写在 `base_link` 机体系；px4ctrl 默认直接把它当世界系使用，方向错了不会报错。
+
+【源码确认】MAVROS 2.14.0 的 `local_position` 插件先把 PX4 NED 转成 ROS ENU，再用姿态把 ENU 速度转回 `base_link` 写入 Odometry。px4ctrl 的 `VEL_IN_BODY` 默认未定义，`input.cpp:158-163` 不会再做这次转换。
+
+**执行了什么：**新增 `environments/integration/odom_bridge.py`，默认只发布 `/integration/odom_world`。它保留位置、姿态和时间戳，只改线速度和 `header.frame_id=world`；不会发布姿态指令，也不会连接 MAVROS setpoint。
+
+先做不依赖 ROS 的方向测试：
+
+```bash
+cd /home/yusei/Documents/Codex/drone-learning-lab
+python3 environments/integration/test_odom_bridge.py
+```
+
+【运行验证】真实输出：
+
+```text
+PASS: identity, +90 deg ENU yaw, and invalid quaternion checks
+```
+
+机体前向速度 `(1, 0, 0)`、ENU 偏航 `+90°` 的结果必须是世界速度 `(0, 1, 0)`。如果得到 `(0, -1, 0)`，先停下来检查四元数方向和坐标约定。
+
+**怎么验证真实话题：**桥接节点放在临时容器中，只观察审查话题：
+
+```bash
+sudo docker run --rm --network host --ipc host \
+  -e RMW_IMPLEMENTATION=rmw_cyclonedds_cpp \
+  -e 'CYCLONEDDS_URI=<CycloneDDS><Domain><General><Interfaces><NetworkInterface name="lo"/></Interfaces></General></Domain></CycloneDDS>' \
+  -v /home/yusei/Documents/Codex/drone-learning-lab/environments/integration:/checks:ro \
+  local/px4-humble:latest bash -lc \
+  'source /opt/ros/humble/setup.bash; python3 /checks/odom_bridge.py'
+```
+
+另开终端读取：
+
+```bash
+sudo docker exec -it px4_mavros bash -lc \
+  'source /opt/ros/humble/setup.bash; ros2 topic echo --once /integration/odom_world'
+```
+
+【运行验证】当前 Gazebo x500 实测输出包含：
+
+```text
+frame_id: world
+child_frame_id: base_link
+twist.twist.linear: (-0.0199, 0.0053, -0.3463) m/s
+```
+
+桥接输入真实频率约 29.84 Hz；IMU 约 49.74 Hz。px4ctrl 配置循环是 100 Hz，但会在 0.5 秒超时内复用最近里程计，不能把控制循环频率写成定位频率。
+
+**记住：**改 `frame_id` 不是坐标变换；位置、姿态、速度必须使用同一套世界系。**下一步：**把桥输出接到独立的 `/imu_propagate` 审查话题，启动 px4ctrl 的状态机但保持不解锁。
+
+## 7. 记录与下一步
 
 **在做什么：**划清验收边界。**为什么：**避免把编译成功误当飞行成功。
 
@@ -211,8 +273,8 @@ sudo docker exec -i px4_mavros bash -lc \
 | 消息定义冲突 | 【运行验证】独立包名可共存，DDS 转换测试通过 |
 | Humble 构建 | 【运行验证】仅两个新增包通过，保留警告 |
 | MAVROS 姿态 QoS | 【运行验证】订阅端与控制器发布配置兼容 |
-| 实时频率、延迟、推力缩放 | 【待验证】后续探针无数据，尚未验收 |
-| 定位坐标桥接与地图对齐 | 【待验证】已定方向，尚未实现 |
+| 实时频率、延迟、推力缩放 | 【运行验证】MAVROS odom≈29.84 Hz、IMU≈49.74 Hz；延迟和推力缩放待验 |
+| 定位坐标桥接与地图对齐 | 【运行验证】机体系速度→世界系桥接通过；地图原点对齐待验 |
 | 无遥控器状态机与启动时序 | 【待验证】尚未运行控制器 |
 | 起飞、轨迹跟踪、降落 | 【待验证】本次没有发送相关指令 |
 
@@ -220,7 +282,7 @@ sudo docker exec -i px4_mavros bash -lc \
 
 **执行与验证：**本页、脚本、运行日志统一保存在学习仓库；构建和安装产物只保存在独立工作空间。网页构建用 `npm run docs:build`，不需要重新构建飞行软件。
 
-**记住：**先让输入正确，再让控制器动起来。**下一步：**定位实时订阅无数据的原因 → 定位坐标桥接测试 → 不解锁的控制器状态机验证 → 再进入起飞验收。
+**记住：**先让输入正确，再让控制器动起来。**下一步：**接入独立 `/imu_propagate` 审查话题 → 不解锁的控制器状态机验证 → 再进入起飞验收。
 
 ## 记忆卡与自测
 

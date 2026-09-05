@@ -8,7 +8,7 @@
 | **VINS-Fusion** | 我在哪（视觉惯性定位） | ✅ 已验收 |
 | **PX4 SITL + QGC** | 怎么飞（飞控与地面站） | ✅ 已验收 |
 
-三个都能单独跑通了。新增【运行验证】：EGO → px4ctrl 消息适配已通过隔离 DDS 测试，控制器与独立消息包编译通过；【待验证】：实时定位接口和飞行闭环。详见[闭环接口教程](docs/integration/interfaces.md)。
+三个都能单独跑通了。新增【运行验证】：EGO → px4ctrl 消息适配、实时 MAVROS 定位采样和坐标桥接已通过；【待验证】：px4ctrl 控制器与飞行闭环。详见[闭环接口教程](docs/integration/interfaces.md)。
 
 📖 **网页版文档**：部署在 GitHub Pages（地址见仓库 About 栏 / Actions 部署结果）
 

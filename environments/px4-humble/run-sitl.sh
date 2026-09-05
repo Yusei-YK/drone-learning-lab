@@ -15,6 +15,11 @@ SIM_C=px4_sitl
 MAVROS_C=px4_mavros
 D="sudo docker"
 
+# CycloneDDS 会在容器启动时记录网卡地址。宿主机换 Wi-Fi 后，旧容器可能
+# 继续向已经不存在的地址发发现包；设置 DDS_INTERFACE=lo 可让本机 ROS 话题
+# 只走回环。留空时保留 CycloneDDS 默认网卡选择，便于跨主机通信。
+DDS_INTERFACE="${DDS_INTERFACE:-}"
+
 # MAVLink 端口（PX4 SITL 的默认约定，别改）：
 #   14550 广播给地面站（QGroundControl 自动监听这个）
 #   14540 给机载软件 / offboard 控制用，MAVROS 连这个
@@ -47,6 +52,11 @@ common_args=(
   -w /px4
   --log-opt max-size=20m --log-opt max-file=2   # 不加上限，日志能涨到几百万行
 )
+if [[ -n "$DDS_INTERFACE" ]]; then
+  common_args+=(
+    -e "CYCLONEDDS_URI=<CycloneDDS><Domain><General><Interfaces><NetworkInterface name=\"$DDS_INTERFACE\"/></Interfaces></General></Domain></CycloneDDS>"
+  )
+fi
 
 in_container() {
   $D exec "$1" bash -lc \
