@@ -1,0 +1,9 @@
+[PX4CTRL] Remote controller disabled, be careful!
+连接状态: 已连接
+解锁状态: 未解锁
+飞行模式: AUTO.LOITER
+当前模式: MANUAL_CTRL
+connected: true
+armed: false
+mode: AUTO.LOITER
+system_status: 3
