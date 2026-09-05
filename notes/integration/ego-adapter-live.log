@@ -1,0 +1,5 @@
+type: px4ctrl_msgs/msg/PositionCommand
+frame_id: world
+trajectory_flag: 1
+trajectory_id: 173
+pos: (-14.9507, 0.0033, 1.0003)

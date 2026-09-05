@@ -17,6 +17,7 @@ set -euo pipefail
 WORKSPACE="${EGO_WORKSPACE:-$HOME/Documents/Codex/ego-humble}"
 IMAGE="${EGO_IMAGE:-local/ego-planner-humble:latest}"
 D="sudo docker"
+DDS_INTERFACE="${DDS_INTERFACE:-}"
 
 : "${DISPLAY:?DISPLAY 未设置。图形界面需要它，请在桌面终端里运行本脚本。}"
 
@@ -47,6 +48,11 @@ common_args=(
   -w /workspace
   --log-opt max-file=2
 )
+if [[ -n "$DDS_INTERFACE" ]]; then
+  common_args+=(
+    -e "CYCLONEDDS_URI=<CycloneDDS><Domain><General><Interfaces><NetworkInterface name=\"$DDS_INTERFACE\"/></Interfaces></General></Domain></CycloneDDS>"
+  )
+fi
 
 in_container() {  # 在容器里跑一条需要 ROS 环境的命令（docker exec 不会执行 ENTRYPOINT）
   $D exec "$1" bash -lc "source /opt/ros/humble/setup.bash && source /workspace/install/setup.bash && $2"
