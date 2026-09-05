@@ -8,7 +8,7 @@
 | **VINS-Fusion** | 我在哪（视觉惯性定位） | ✅ 已验收 |
 | **PX4 SITL + QGC** | 怎么飞（飞控与地面站） | ✅ 已验收 |
 
-三个都能单独跑通了，下一步是把它们接成完整闭环。
+三个都能单独跑通了。新增【运行验证】：EGO → px4ctrl 消息适配已通过隔离 DDS 测试，控制器与独立消息包编译通过；【待验证】：实时定位接口和飞行闭环。详见[闭环接口教程](docs/integration/interfaces.md)。
 
 📖 **网页版文档**：部署在 GitHub Pages（地址见仓库 About 栏 / Actions 部署结果）
 
@@ -65,7 +65,7 @@
 
 **还没装、也暂时不装：** RealSense 实机驱动、Isaac Sim、MuJoCo。这三个留在[学习路线](docs/getting-started/roadmap.md)里，不进主线。
 
-`px4ctrl` 的 ROS 2 移植（[Ethan-02/px4ctrl-ros2-fast-drone](https://github.com/Ethan-02/px4ctrl-ros2-fast-drone)）源码已钉住但**故意还没集成**——它是连接 EGO 规划输出和 PX4 的那一环，等 PX4 起飞闭环验完再接，理由写在 PX4 环境页第 11 节。
+`px4ctrl` 的 ROS 2 移植（[Ethan-02/px4ctrl-ros2-fast-drone](https://github.com/Ethan-02/px4ctrl-ros2-fast-drone)）源码已钉住。控制器副本已完成独立消息包适配及 Humble 编译修复，原始上游目录未修改；尚未接入飞行控制。对接方案和验收边界见[第七步](docs/integration/interfaces.md)。
 
 ## 仓库结构
 

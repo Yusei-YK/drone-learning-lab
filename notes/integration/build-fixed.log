@@ -1,0 +1,31 @@
+Starting >>> px4ctrl_msgs
+Finished <<< px4ctrl_msgs [0.49s]
+Starting >>> px4ctrl
+--- stderr: px4ctrl
+In file included from /integration/src/px4ctrl/include/input.h:16,
+                 from /integration/src/px4ctrl/include/PX4CtrlFSM.h:12,
+                 from /integration/src/px4ctrl/src/PX4CtrlFSM.cpp:1:
+/integration/src/px4ctrl/include/PX4CtrlParam.h:119:10: warning: extra ‘;’ [-Wpedantic]
+  119 |         };
+      |          ^
+      |          -
+In file included from /integration/src/px4ctrl/src/PX4CtrlFSM.cpp:1:
+/integration/src/px4ctrl/include/PX4CtrlFSM.h: In constructor ‘PX4CtrlFSM::PX4CtrlFSM(Parameter_t&, LinearControl&, rclcpp::Node::SharedPtr)’:
+/integration/src/px4ctrl/include/PX4CtrlFSM.h:44:24: warning: ‘PX4CtrlFSM::controller’ will be initialized after [-Wreorder]
+   44 |         LinearControl &controller;  // 控制器引用
+      |                        ^~~~~~~~~~
+/integration/src/px4ctrl/include/PX4CtrlFSM.h:31:33: warning:   ‘rclcpp::Node::SharedPtr PX4CtrlFSM::node_’ [-Wreorder]
+   31 |         rclcpp::Node::SharedPtr node_;  // ROS2节点指针
+      |                                 ^~~~~
+/integration/src/px4ctrl/src/PX4CtrlFSM.cpp:7:1: warning:   when initialized here [-Wreorder]
+    7 | PX4CtrlFSM::PX4CtrlFSM(Parameter_t &param_, LinearControl &controller_, rclcpp::Node::SharedPtr node)
+      | ^~~~~~~~~~
+/integration/src/px4ctrl/src/PX4CtrlFSM.cpp: In member function ‘void PX4CtrlFSM::set_start_pose_for_takeoff_land(const Odom_Data_t&)’:
+/integration/src/px4ctrl/src/PX4CtrlFSM.cpp:649:69: warning: unused parameter ‘odom’ [-Wunused-parameter]
+  649 | void PX4CtrlFSM::set_start_pose_for_takeoff_land(const Odom_Data_t &odom)
+      |                                                  ~~~~~~~~~~~~~~~~~~~^~~~
+---
+Finished <<< px4ctrl [6.44s]
+
+Summary: 2 packages finished [7.09s]
+  1 package had stderr output: px4ctrl

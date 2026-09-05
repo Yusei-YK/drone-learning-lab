@@ -1,0 +1,169 @@
+not found: "/home/yusei/Documents/Codex/ego-humble/install/cmake_utils/share/cmake_utils/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/drone_detect/share/drone_detect/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/map_generator/share/map_generator/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/mockamap/share/mockamap/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/plan_env/share/plan_env/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/path_searching/share/path_searching/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/pose_utils/share/pose_utils/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/quadrotor_msgs/share/quadrotor_msgs/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/local_sensing/share/local_sensing/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/multi_map_server/share/multi_map_server/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/odom_visualization/share/odom_visualization/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/poscmd_2_odom/share/poscmd_2_odom/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/so3_control/share/so3_control/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/traj_utils/share/traj_utils/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/bspline_opt/share/bspline_opt/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/ego_planner/share/ego_planner/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/rosmsg_tcp_bridge/share/rosmsg_tcp_bridge/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/uav_utils/share/uav_utils/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/so3_quadrotor_simulator/share/so3_quadrotor_simulator/local_setup.bash"
+not found: "/home/yusei/Documents/Codex/ego-humble/install/waypoint_generator/share/waypoint_generator/local_setup.bash"
+Starting >>> px4ctrl_msgs
+Finished <<< px4ctrl_msgs [7.34s]
+Starting >>> px4ctrl
+--- stderr: px4ctrl
+In file included from /integration/src/px4ctrl/src/PX4CtrlParam.cpp:1:
+/integration/src/px4ctrl/include/PX4CtrlParam.h:119:10: warning: extra ‘;’ [-Wpedantic]
+  119 |         };
+      |          ^
+      |          -
+In file included from /integration/src/px4ctrl/include/px4ctrl_node.h:6,
+                 from /integration/src/px4ctrl/src/px4ctrl_node.cpp:1:
+/integration/src/px4ctrl/include/PX4CtrlParam.h:119:10: warning: extra ‘;’ [-Wpedantic]
+  119 |         };
+      |          ^
+      |          -
+/integration/src/px4ctrl/src/px4ctrl_node.cpp: In function ‘void mySigintHandler(int)’:
+/integration/src/px4ctrl/src/px4ctrl_node.cpp:6:26: warning: unused parameter ‘sig’ [-Wunused-parameter]
+    6 | void mySigintHandler(int sig)
+      |                      ~~~~^~~
+In file included from /integration/src/px4ctrl/include/controller.h:13,
+                 from /integration/src/px4ctrl/src/controller.cpp:1:
+/integration/src/px4ctrl/include/PX4CtrlParam.h:119:10: warning: extra ‘;’ [-Wpedantic]
+  119 |         };
+      |          ^
+      |          -
+/integration/src/px4ctrl/src/controller.cpp: In member function ‘px4ctrl_msgs::msg::Px4ctrlDebug LinearControl::calculateControl(const Desired_State_t&, const Odom_Data_t&, const Imu_Data_t&, Controller_Output_t&)’:
+/integration/src/px4ctrl/src/controller.cpp:48:23: warning: unused variable ‘yaw’ [-Wunused-variable]
+   48 |     double roll,pitch,yaw,yaw_imu;
+      |                       ^~~
+/integration/src/px4ctrl/src/controller.cpp:48:27: warning: variable ‘yaw_imu’ set but not used [-Wunused-but-set-variable]
+   48 |     double roll,pitch,yaw,yaw_imu;
+      |                           ^~~~~~~
+/integration/src/px4ctrl/src/controller.cpp: In member function ‘bool LinearControl::estimateThrustModel(const Vector3d&, const Parameter_t&)’:
+/integration/src/px4ctrl/src/controller.cpp:113:24: warning: unused parameter ‘param’ [-Wunused-parameter]
+  113 |     const Parameter_t &param)
+      |     ~~~~~~~~~~~~~~~~~~~^~~~~
+In file included from /integration/src/px4ctrl/include/input.h:16,
+                 from /integration/src/px4ctrl/src/input.cpp:1:
+/integration/src/px4ctrl/include/PX4CtrlParam.h:119:10: warning: extra ‘;’ [-Wpedantic]
+  119 |         };
+      |          ^
+      |          -
+/integration/src/px4ctrl/src/px4ctrl_node.cpp: In function ‘int main(int, char**)’:
+/integration/src/px4ctrl/src/px4ctrl_node.cpp:18:37: warning: ignoring return value of ‘rcutils_ret_t rcutils_logging_set_logger_level(const char*, int)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   18 |     rcutils_logging_set_logger_level(node->get_logger().get_name(), RCUTILS_LOG_SEVERITY_DEBUG);
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /integration/src/px4ctrl/include/input.h:16,
+                 from /integration/src/px4ctrl/include/PX4CtrlFSM.h:12,
+                 from /integration/src/px4ctrl/src/PX4CtrlFSM.cpp:1:
+/integration/src/px4ctrl/include/PX4CtrlParam.h:119:10: warning: extra ‘;’ [-Wpedantic]
+  119 |         };
+      |          ^
+      |          -
+In file included from /integration/src/px4ctrl/src/PX4CtrlFSM.cpp:1:
+/integration/src/px4ctrl/include/PX4CtrlFSM.h: In constructor ‘PX4CtrlFSM::PX4CtrlFSM(Parameter_t&, LinearControl&, rclcpp::Node::SharedPtr)’:
+/integration/src/px4ctrl/include/PX4CtrlFSM.h:44:24: warning: ‘PX4CtrlFSM::controller’ will be initialized after [-Wreorder]
+   44 |         LinearControl &controller;  // 控制器引用
+      |                        ^~~~~~~~~~
+/integration/src/px4ctrl/include/PX4CtrlFSM.h:31:33: warning:   ‘rclcpp::Node::SharedPtr PX4CtrlFSM::node_’ [-Wreorder]
+   31 |         rclcpp::Node::SharedPtr node_;  // ROS2节点指针
+      |                                 ^~~~~
+/integration/src/px4ctrl/src/PX4CtrlFSM.cpp:7:1: warning:   when initialized here [-Wreorder]
+    7 | PX4CtrlFSM::PX4CtrlFSM(Parameter_t &param_, LinearControl &controller_, rclcpp::Node::SharedPtr node)
+      | ^~~~~~~~~~
+/integration/src/px4ctrl/src/PX4CtrlFSM.cpp: In member function ‘void PX4CtrlFSM::process()’:
+/integration/src/px4ctrl/src/PX4CtrlFSM.cpp:388:126: error: no matching function for call to ‘rclcpp::Duration::Duration(const double&)’
+  388 |                         takeoff_land.delay_trigger.second = now_time + rclcpp::Duration(AutoTakeoffLand_t::DELAY_TRIGGER_TIME);
+      |                                                                                                                              ^
+In file included from /opt/ros/humble/include/rclcpp/rclcpp/qos.hpp:20,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/node_interfaces/node_graph_interface.hpp:33,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/client.hpp:42,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155,
+                 from /integration/src/px4ctrl/include/PX4CtrlFSM.h:4,
+                 from /integration/src/px4ctrl/src/PX4CtrlFSM.cpp:1:
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:48:3: note: candidate: ‘template<class Rep, class Period> rclcpp::Duration::Duration(const std::chrono::duration<_Rep1, _Period1>&)’
+   48 |   Duration(const std::chrono::duration<Rep, Period> & duration)  // NOLINT(runtime/explicit)
+      |   ^~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:48:3: note:   template argument deduction/substitution failed:
+/integration/src/px4ctrl/src/PX4CtrlFSM.cpp:388:126: note:   mismatched types ‘const std::chrono::duration<_Rep1, _Period1>’ and ‘const double’
+  388 |                         takeoff_land.delay_trigger.second = now_time + rclcpp::Duration(AutoTakeoffLand_t::DELAY_TRIGGER_TIME);
+      |                                                                                                                              ^
+In file included from /opt/ros/humble/include/rclcpp/rclcpp/qos.hpp:20,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/node_interfaces/node_graph_interface.hpp:33,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/client.hpp:42,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21,
+                 from /opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155,
+                 from /integration/src/px4ctrl/include/PX4CtrlFSM.h:4,
+                 from /integration/src/px4ctrl/src/PX4CtrlFSM.cpp:1:
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:151:3: note: candidate: ‘rclcpp::Duration::Duration()’
+  151 |   Duration() = default;
+      |   ^~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:151:3: note:   candidate expects 0 arguments, 1 provided
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:61:3: note: candidate: ‘rclcpp::Duration::Duration(const rclcpp::Duration&)’
+   61 |   Duration(const Duration & rhs);
+      |   ^~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:61:29: note:   no known conversion for argument 1 from ‘const double’ to ‘const rclcpp::Duration&’
+   61 |   Duration(const Duration & rhs);
+      |            ~~~~~~~~~~~~~~~~~^~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:59:12: note: candidate: ‘rclcpp::Duration::Duration(const rcl_duration_t&)’
+   59 |   explicit Duration(const rcl_duration_t & duration);
+      |            ^~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:59:44: note:   no known conversion for argument 1 from ‘const double’ to ‘const rcl_duration_t&’ {aka ‘const rcl_duration_s&’}
+   59 |   explicit Duration(const rcl_duration_t & duration);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:53:3: note: candidate: ‘rclcpp::Duration::Duration(const Duration&)’
+   53 |   Duration(const builtin_interfaces::msg::Duration & duration_msg);  // NOLINT(runtime/explicit)
+      |   ^~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:53:54: note:   no known conversion for argument 1 from ‘const double’ to ‘const Duration&’ {aka ‘const builtin_interfaces::msg::Duration_<std::allocator<void> >&’}
+   53 |   Duration(const builtin_interfaces::msg::Duration & duration_msg);  // NOLINT(runtime/explicit)
+      |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:42:12: note: candidate: ‘rclcpp::Duration::Duration(std::chrono::nanoseconds)’
+   42 |   explicit Duration(std::chrono::nanoseconds nanoseconds);
+      |            ^~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:42:46: note:   no known conversion for argument 1 from ‘const double’ to ‘std::chrono::nanoseconds’ {aka ‘std::chrono::duration<long int, std::ratio<1, 1000000000> >’}
+   42 |   explicit Duration(std::chrono::nanoseconds nanoseconds);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:39:3: note: candidate: ‘rclcpp::Duration::Duration(int32_t, uint32_t)’
+   39 |   Duration(int32_t seconds, uint32_t nanoseconds);
+      |   ^~~~~~~~
+/opt/ros/humble/include/rclcpp/rclcpp/duration.hpp:39:3: note:   candidate expects 2 arguments, 1 provided
+/integration/src/px4ctrl/src/PX4CtrlFSM.cpp: In member function ‘void PX4CtrlFSM::set_start_pose_for_takeoff_land(const Odom_Data_t&)’:
+/integration/src/px4ctrl/src/PX4CtrlFSM.cpp:649:69: warning: unused parameter ‘odom’ [-Wunused-parameter]
+  649 | void PX4CtrlFSM::set_start_pose_for_takeoff_land(const Odom_Data_t &odom)
+      |                                                  ~~~~~~~~~~~~~~~~~~~^~~~
+gmake[2]: *** [CMakeFiles/px4ctrl_node.dir/build.make:146: CMakeFiles/px4ctrl_node.dir/src/PX4CtrlFSM.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/px4ctrl_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
+---
+Failed   <<< px4ctrl [30.7s, exited with code 2]
+
+Summary: 1 package finished [38.2s]
+  1 package failed: px4ctrl
+  1 package had stderr output: px4ctrl

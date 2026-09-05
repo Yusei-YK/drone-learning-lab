@@ -1,0 +1,5 @@
+1788587053.291248 [87]    python3: selected interface "lo" is not multicast-capable: disabling multicast
+PASS: real ROS message types, vector/yaw/header/gain/id mapping; jerk/heading policy
+PASS: rejected wrong frame, non-READY, NaN, stale and future messages
+[WARN] [1788587053.361173417] [ego_px4ctrl_command_adapter]: expected world frame; no implicit frame renaming
+PASS: DDS EGO publisher -> adapter -> px4ctrl_msgs subscriber; invalid frame not forwarded

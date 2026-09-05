@@ -24,6 +24,7 @@ export default withMermaid(defineConfig({
       { text: '读源码', link: '/ego-planner/source-reading' },
       { text: 'PX4 SITL', link: '/px4-sitl/environment' },
       { text: 'VINS-Fusion', link: '/vins-fusion/environment' },
+      { text: '闭环接口', link: '/integration/interfaces' },
       { text: '排错', link: '/debugging/ego-runtime' }
     ],
     sidebar: [
@@ -53,6 +54,12 @@ export default withMermaid(defineConfig({
         text: '视觉惯性里程计（VIO）',
         items: [
           { text: '第六步：装 VINS-Fusion', link: '/vins-fusion/environment' }
+        ]
+      },
+      {
+        text: '完整闭环',
+        items: [
+          { text: '第七步：对齐规划与飞控接口', link: '/integration/interfaces' }
         ]
       },
       {

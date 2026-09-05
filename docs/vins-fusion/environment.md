@@ -694,3 +694,6 @@ sudo docker logs --tail 3000 vins_node 2>&1 | grep -iE 'restart|failure|lost|rel
 **下一个里程碑是把它们接起来**，缺的那一环是 `px4ctrl` —— 它订阅 EGO-Planner 的规划输出，翻译成 PX4 能听懂的 MAVLink 指令。源码已经钉住（[Ethan-02/px4ctrl-ros2-fast-drone](https://github.com/Ethan-02/px4ctrl-ros2-fast-drone)），故意还没集成。
 
 接之前要先想清楚**三个部件之间的数据流**：各自的话题名、坐标系约定、频率对不对得上。三个都能单独跑，不等于接起来就能跑 —— 接口不匹配是这一步最常见的失败原因，而且症状往往是"什么都不动，也不报错"。
+
+
+接口核对与第一批适配结果见[第七步：对齐规划与飞控接口](/integration/interfaces)。目前只通过隔离消息测试，完整飞行闭环仍待验证。
