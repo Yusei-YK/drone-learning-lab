@@ -22,6 +22,8 @@ export default withMermaid(defineConfig({
       { text: '环境', link: '/getting-started/environment' },
       { text: 'EGO 仿真', link: '/ego-planner/simulation' },
       { text: '读源码', link: '/ego-planner/source-reading' },
+      { text: 'PX4 SITL', link: '/px4-sitl/environment' },
+      { text: 'VINS-Fusion', link: '/vins-fusion/environment' },
       { text: '排错', link: '/debugging/ego-runtime' }
     ],
     sidebar: [
@@ -42,10 +44,28 @@ export default withMermaid(defineConfig({
         ]
       },
       {
+        text: 'PX4 SITL 与地面站',
+        items: [
+          { text: '第五步：装 PX4 SITL + Gazebo + QGC', link: '/px4-sitl/environment' }
+        ]
+      },
+      {
+        text: '视觉惯性里程计（VIO）',
+        items: [
+          { text: '第六步：装 VINS-Fusion', link: '/vins-fusion/environment' }
+        ]
+      },
+      {
         text: '调试记录（只写真实踩过的坑）',
         items: [
           { text: '构建期问题', link: '/debugging/docker-build' },
           { text: '运行期问题', link: '/debugging/ego-runtime' }
+        ]
+      },
+      {
+        text: '专题：搞清楚为什么',
+        items: [
+          { text: 'OpenCV 为什么没有 CUDA', link: '/reference/opencv-cuda' }
         ]
       }
     ],
