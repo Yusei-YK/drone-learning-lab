@@ -1,6 +1,6 @@
 # Docker 构建排错
 
-这里只记录已经真实出现的问题，不提前编造解决方案。
+本页整理构建阶段的诊断方法。每个条目按现象、原因、处理和验证组织；命令和输出用于帮助你在自己的环境中定位同类问题。
 
 ## 1. legacy builder 不支持 `--progress`
 
@@ -40,7 +40,7 @@ sudo docker build -t local/ego-planner-humble:latest .
 镜像拉取失败时，**先分清是"网络到不了"还是"配置写错了"**。看报错里的关键词：出现 `timeout`、`connection refused`、`i/o timeout` 基本都是网络；出现 `unknown flag`、`invalid reference format` 才是命令写错了。这两类的处理方式完全不同，混在一起排查会很浪费时间。
 :::
 
-## 3. 编译期的三个坑
+## 3. 编译期的三个问题
 
 镜像好了之后，`colcon build` 阶段还有三个问题，因为它们和编译流程绑得很紧，**完整记录写在 [第二步：编译工作空间](/ego-planner/build)**，这里只列索引：
 

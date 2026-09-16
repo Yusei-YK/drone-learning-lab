@@ -1,75 +1,76 @@
 ---
 layout: home
-
 hero:
-  name: 自主无人机开发学习手册
-  text: 一个新手把 EGO-Planner 真正跑起来的全过程
-  tagline: 每条命令都实测过，每张截图都是真机画面，每个结论都标了证据来源
+  name: 自主无人机开发手册
+  text: 从 ROS 2 仿真到自主飞行系统
+  tagline: 理解定位、规划与控制的关系，搭建可复现环境，逐步学会运行、阅读和修改开源工程。
   actions:
     - theme: brand
-      text: 从第一步开始
-      link: /getting-started/environment
+      text: 阅读课程导读
+      link: /getting-started/roadmap
     - theme: alt
-      text: 直接看仿真怎么跑
-      link: /ego-planner/simulation
-
+      text: 开始第一个实验
+      link: /getting-started/environment
 features:
-  - title: 照着敲就能复现
-    details: 命令一个字都没简化，每个参数都解释了"去掉会怎样"，配真实终端和 RViz 截图。
-  - title: 证据分级，不吹不猜
-    details: 【源码确认】给出 文件:行号，【运行验证】给出真实输出，【推测】和【待验证】绝不伪装成结论。
-  - title: 只写真实踩过的坑
-    details: 排错页里没有一条是编造的"可能问题"，全部来自实际报错，并写清了为什么会发生。
+  - title: 按章节学习
+    details: 从环境和基本概念开始，依次学习规划仿真、源码阅读、飞控、视觉惯性定位与系统接口。
+  - title: 动手理解原理
+    details: 每章给出操作位置、完整命令、参数说明和检查方法，将运行现象对应到程序与数据流。
+  - title: 用实验验证理解
+    details: 配合真实运行数据、源码位置、练习和自测题，区分已经验证的能力与后续研究方向。
 ---
 
-## 这份文档是什么
+## 你将学会什么
 
-一个**完全的新手**在自己的笔记本上，从零把 [EGO-Planner](https://github.com/ZJU-FAST-Lab/ego-planner-swarm)（浙江大学 FAST-Lab 的无人机局部轨迹规划器）的 ROS 2 版本跑起来的真实记录。
+自主无人机需要回答三个相互关联的问题：**现在在哪里、接下来往哪里走、怎样跟随目标运动**。本手册以 ROS 2 Humble 为开发环境，围绕 VINS-Fusion、EGO-Planner 和 PX4，介绍定位、规划、控制之间的关系，并通过逐层实验建立完整的工程认识。
 
-目标不是"能跑就行"，而是**环境可复现 + 项目可运行 + 源码能理解 + 能自己改**。所以每一步都会回答四个问题：现在在做什么、为什么需要它、怎么验证成功了、我应该记住什么。
+学习目标包括四部分：搭建可复现的环境，运行开源项目，理解关键源码，以及独立修改和验证系统行为。完成某个实验后，你不仅应当得到运行结果，还应能解释输入从哪里来、程序做了什么、输出如何被下一模块使用。
 
-## 当前进度
+## 选择你的学习入口
 
-::: tip 单机仿真已经跑通并完成验收【运行验证】
-- Docker 镜像 `local/ego-planner-humble:latest`（4.84 GB）构建成功
-- `colcon build` **20 个包全部成功**，无失败
-- 8 个节点全部起来，闭环数据流稳定：`pos_cmd` **100.002 Hz**，标准差 0.07 ms
-- RViz 硬件渲染正常（`OpenGl version: 4.6`），能看到无人机在柱子林里来回穿行
-- 状态机走通 `INIT → WAIT_TARGET → GEN_NEW_TRAJ → EXEC_TRAJ ⇄ REPLAN_TRAJ`，单次优化 **0.512 ms**
-:::
-
-四项验收全过。下一步是系统地读源码，以及往后接 VINS / PX4，路线见 [学习路线](/getting-started/roadmap)。
-
-## 怎么用这份文档
-
-四页按顺序看，每页都能独立验收：
-
-| 页面 | 你会得到 | 大概耗时 |
+| 你的基础或目标 | 建议入口 | 完成后应掌握 |
 | --- | --- | --- |
-| [第一步：搭环境](/getting-started/environment) | 一个不污染宿主机的 ROS 2 Humble 容器 | 首次 15~30 分钟 |
-| [第二步：编译工作空间](/ego-planner/build) | 20 个包编译完成，`ros2 pkg list` 能认出来 | 首次 10~20 分钟 |
-| [第三步：跑通单机仿真](/ego-planner/simulation) | 看得见的飞行画面 + 4 项验收 | 首次 20 分钟，之后 2 分钟 |
-| [第四步：读懂源码](/ego-planner/source-reading) | 6390 行 C++ 的阅读路线、状态机全图、两个可回滚的小修改练习 | 读 1~2 小时 |
+| 第一次使用本手册 | [课程导读与学习路线](/getting-started/roadmap) | 各章节关系、学习顺序和实验范围 |
+| 已掌握 Linux 基本操作，准备搭环境 | [第一章：开发环境](/getting-started/environment) | 镜像、容器、挂载目录与 ROS 环境 |
+| 想先观察路径规划 | [第三章：规划仿真](/ego-planner/simulation) | 设置目标、观察轨迹、检查节点和话题 |
+| 已经跑通仿真，准备改代码 | [第四章：源码阅读](/ego-planner/source-reading) | 状态机、调用链及可验证的修改方法 |
+| 关注飞控与物理仿真 | [第五章：PX4 SITL](/px4-sitl/environment) | MAVLink、飞行模式、起降与双源验证 |
+| 关注相机与 IMU 定位 | [第六章：视觉惯性定位](/vins-fusion/environment) | 依赖、数据集、配置及轨迹评价 |
+| 准备连接规划与飞控 | [第七章：系统接口](/integration/interfaces) | 消息、坐标系、时间、QoS 与反馈关系 |
 
-卡住了就看排错页：[构建期问题](/debugging/docker-build)、[运行期问题](/debugging/ego-runtime)。
+如果还不熟悉终端和 ROS 2 的节点、话题、服务，可先结合[鱼香 ROS 2 Humble 教程](https://fishros.com/d2lros2/#/humble/chapt1/章节导读)学习基础；飞控术语可参阅 [PX4 基本概念](https://docs.px4.io/main/en/getting_started/px4_basic_concepts.html)。本手册侧重这些知识在自主无人机工程中的具体应用。
 
-## 证据标签怎么读
+## 实验范围与版本
 
-文档里每个重要结论都带标签，**请按标签决定信任程度**：
+以下为已有实验的能力边界，详细命令和证据放在相应章节中。
 
-| 标签 | 含义 | 你可以怎么用 |
+| 实验 | 已验证内容 | 后续内容 |
 | --- | --- | --- |
-| 【源码确认】 | 读了源码，给出 `文件:行号` | 可以直接引用，自己也能去核对 |
-| 【运行验证】 | 在本机真实执行过，附真实输出 | 可以照着复现 |
-| 【推测】 | 合理解释，但没有直接证据 | 当思路参考，不要当事实 |
-| 【待验证】 | 还没做过 | 只是计划，不要当成能用的方案 |
+| EGO-Planner | 【运行验证】单机规划仿真、20 包构建、约 100 Hz 位置指令 | 与真实动力学和控制器联合验证 |
+| PX4 SITL | 【运行验证】v1.15.4 与 v1.16.0 分别完成起降；v1.16.0 使用原厂 X500 | 外部控制器悬停、轨迹跟踪与异常退出 |
+| VINS-Fusion | 【运行验证】固定 ROS 2 移植版本在 EuRoC 数据集上输出轨迹 | 真值对齐评价、实时传感器标定与接入 |
+| 系统接口 | 【运行验证】消息适配、MAVROS 定位采样与坐标桥接 | 完整 EGO → px4ctrl → PX4 飞行闭环 |
+| 实机 | 【待验证】D435、Mid360、Orin NX 与 Pixhawk 6C mini 的部署 | 设备接入、标定、时钟与机载性能测试 |
 
-::: warning 这份文档的局限
-所有结论都来自**一台机器**：Ubuntu 24.04.3 + RTX 4060 + X11 桌面。换硬件、换发行版、用 Wayland，都可能不一样——尤其是显卡设备号和图形转发部分。**遇到不一致时，相信你机器上的实际输出，不要相信这份文档。**
-:::
+实验环境为 Ubuntu 24.04 宿主机和 Ubuntu 22.04 / ROS 2 Humble 容器。命令中的 `/home/yusei/...` 是参考机器路径；在其他电脑上操作时，需要统一替换为自己的用户名和工作空间位置。已经完成的镜像和构建产物可以复用。
 
-## 关于第三方代码
+## 每章怎样学习
 
-EGO-Planner 由**浙江大学 FAST-Lab** 开发并以 **GPL-3.0** 授权，上游仓库是 [ZJU-FAST-Lab/ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm)（本项目用 `ros2_version` 分支，`23a8d5a`）。
+先阅读学习目标和前置条件，再理解本章的数据流。执行实验时，确认命令是在宿主机还是容器内运行，逐项比较实际输出与验收标准。最后完成自测或修改练习，并记录版本、关键参数和结果。
 
-本项目**只是学习复现**：不把上游源码复制进本仓库，不修改第三方代码，不把上游 README 当成自己的内容。文档里所有对源码的引用都注明了 `文件:行号`，方便你回到原仓库核对。算法和实现的功劳属于原作者。
+重要结论保留来源标签，便于进一步查证：
+
+| 标签 | 阅读方式 |
+| --- | --- |
+| 【源码确认】 | 根据给出的版本、文件和行号核对实现 |
+| 【运行验证】 | 参考对应环境中的真实输出，在自己的环境复验 |
+| 【推测】 | 作为解释或排查方向，仍需证据支持 |
+| 【待验证】 | 作为后续实验任务，不当作已具备的能力 |
+
+遇到问题时，按现象查阅[构建问题](/debugging/docker-build)、[运行问题](/debugging/ego-runtime)或[日志与资源管理](/debugging/px4-log-overflow)。
+
+## 开源项目与致谢
+
+本手册围绕 [ZJU-FAST-Lab/ego-planner-swarm](https://github.com/ZJU-FAST-Lab/ego-planner-swarm)、[PX4](https://github.com/PX4/PX4-Autopilot)、[VINS-Fusion](https://github.com/HKUST-Aerial-Robotics/VINS-Fusion)、其 [ROS 2 移植](https://github.com/zinuok/VINS-Fusion-ROS2)及 [px4ctrl ROS 2 移植](https://github.com/Ethan-02/px4ctrl-ros2-fast-drone)开展实验，并参考 [Fast-Drone-250](https://github.com/ZJU-FAST-Lab/Fast-Drone-250)的系统组成。
+
+算法和原始实现归各项目作者所有，各上游项目的 License 保持适用。本仓库提供实验脚本、接口适配和中文讲解；版本与改动范围在对应章节注明。

@@ -1,6 +1,8 @@
 # 第三步：跑通 EGO-Planner 单机仿真
 
 ::: tip 这一页你会得到什么
+本章将规划器放入一个可观察、可重复的单机实验中。重点不是“看见飞机移动”，而是建立从目标、地图、规划轨迹到位置指令的因果关系。
+
 一条能反复执行的启动流程，加上 4 个"看得见"的验收项。做完之后你能回答：无人机为什么会动、谁告诉它往哪飞、怎么证明它真的在规划而不是在播放动画。
 
 前置：已完成 [第一步：搭环境](/getting-started/environment) 和 [第二步：编译工作空间](/ego-planner/build)。
@@ -128,7 +130,7 @@ sudo docker run -d --name ego_sim \
 | `-e RMW_IMPLEMENTATION=...` | 指定用 CycloneDDS 通信中间件 | 和宿主机 ROS 2 的默认中间件不一致时互相看不见 |
 | `-v .../ego-humble:/workspace` | 把工作空间挂进容器 | 容器里没有代码，也找不到 `install/` |
 | `-v /tmp/.X11-unix:...` | 挂载 X11 的通信套接字 | `$DISPLAY` 设了也连不上屏幕 |
-| `--log-opt max-size=20m` | 限制日志文件大小并轮转 | **这是踩过的坑**：日志涨到 690 万行，详见 [运行期问题](/debugging/ego-runtime) |
+| `--log-opt max-size=20m` | 限制日志文件大小并轮转 | **这是常见问题**：日志涨到 690 万行，详见 [运行期问题](/debugging/ego-runtime) |
 
 ::: tip 记忆方法
 把这串参数分成三组来记：**网络**（`--network host --ipc host`，为了 DDS 能通）、**屏幕**（`DISPLAY` + `.X11-unix` + `QT_X11_NO_MITSHM`，为了能画图）、**磁盘**（`-v /workspace` + `--log-opt`，为了有代码、日志不爆）。三组齐了，容器就能干活。
@@ -179,7 +181,7 @@ sudo docker run -d --name ego_rviz \
   ros2 launch ego_planner rviz.launch.py
 ```
 
-比上一条只多了 4 个 `--device`。**为什么必须加**：不加的话容器里的 Mesa 打不开显卡，会退回 CPU 软件渲染（`llvmpipe`），点云一多就卡成幻灯片。这是踩过的坑，报错长这样：`MESA: error: Failed to query drm device` / `failed to open /dev/dri/card1`。
+比上一条只多了 4 个 `--device`。**为什么必须加**：不加的话容器里的 Mesa 打不开显卡，会退回 CPU 软件渲染（`llvmpipe`），点云一多就卡成幻灯片。这是常见问题，报错长这样：`MESA: error: Failed to query drm device` / `failed to open /dev/dri/card1`。
 
 验证它真的用上了硬件：
 
@@ -236,7 +238,7 @@ sudo docker exec ego_sim bash -lc \
 
 ## 7. 验收项 2：频率对不对
 
-节点在不代表数据在流。**最能说明问题的是频率**，因为频率是骗不了人的。
+节点在不代表数据在流。**最能说明问题的是频率**，因为频率是造成误判不了人的。
 
 先测那根闭环线：
 

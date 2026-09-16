@@ -1,6 +1,8 @@
 # 第四步：读懂 EGO-Planner 源码
 
 ::: tip 这一页解决什么问题
+本章是一份源码阅读指南。每一节先说明阅读目标，再给出入口文件、调用关系和可以执行的验证方法。
+
 仿真跑通之后，屏幕上有一条绿色轨迹在动，但你不知道那条线是谁算出来的、算错了该去哪里看。这一页把 6390 行 C++ 拆成一条**从外到内、每层都能停下来验证**的阅读路线，让你最后能自己改一行代码并看到效果。
 
 本页所有行号都来自实际源码，标了【源码确认】的都可以用 `sed -n 'N p' 文件` 复现。
@@ -34,7 +36,7 @@
 优先级的含义：**A = 现在必须读懂**（不读懂就无法定位任何问题）；**B = 想改行为时再读**；**C = 想改算法时再读，需要先补数学**。
 
 ::: warning 不要一开始就读 bspline_optimizer.cpp
-它是最大的文件（1862 行），也是论文的核心创新点，但它是纯数学优化，没有地图就读它等于自虐。先把 A 类三个文件读完，你会自然知道它的输入输出是什么，那时再读会容易十倍。
+它是最大的文件（1862 行），也是论文的核心创新点，但它是纯数学优化，没有地图就读它等于难以建立正确的理解。先把 A 类三个文件读完，你会自然知道它的输入输出是什么，那时再读会容易十倍。
 :::
 
 ## 1. 第一层：全局架构（三个角色）
@@ -183,10 +185,10 @@ sed -n '24,56p' ~/Documents/Codex/ego-humble/src/ego-planner-swarm/src/planner/p
 | 多线程 | `ros::AsyncSpinner async_spinner(4)` | `rclcpp::spin`（单线程）或 `MultiThreadedExecutor` |
 | Ctrl-C | 自己 `signal(SIGINT, ...)` + `NoSigintHandler` | `rclcpp` 默认处理，不用自己写 |
 
-::: warning 这里有一个必须记住的坑
+::: warning 这里有一个必须掌握的要点
 ROS 1 的 `NodeHandle nh("~")` 里那个 `~` 表示「私有命名空间」，参数和话题会自动挂在节点名下面。**ROS 2 没有这个概念**，节点名和参数是分开管理的。
 
-这正是这个移植版最容易出问题的地方 —— 参数不会自动挂进来，而且 **ROS 2 对没有 `declare_parameter` 声明过的参数会静默忽略**。我们在地图复现性问题上真实踩过这个坑，完整过程见[运行期排错](/debugging/ego-runtime)。
+这正是这个移植版最容易出问题的地方 —— 参数不会自动挂进来，而且 **ROS 2 对没有 `declare_parameter` 声明过的参数会静默忽略**。该问题曾在地图复现性验证中出现过，完整过程见[运行期排错](/debugging/ego-runtime)。
 
 **怎么记**：ROS 1 的 `~` 是「魔法自动挂载」，ROS 2 取消了魔法，改成「必须先申报才能收」。
 :::
@@ -254,7 +256,7 @@ node_->get_parameter("fsm/planning_horizon", planning_horizen_);
 ::: warning 一半的接口是多机用的
 这个仓库叫 `ego-planner-swarm`，多机是它的主要卖点。单机跑的时候有 4 个话题是空转的。
 
-**排错含义**：`ros2 topic list` 里看到 `swarm_trajs` 之类的话题**存在但没有数据**是完全正常的。光有订阅者也会让话题出现在列表里 —— 别把它当故障追。这个坑我们真实踩过，记在[运行期排错](/debugging/ego-runtime)。
+**排错含义**：`ros2 topic list` 里看到 `swarm_trajs` 之类的话题**存在但没有数据**是完全正常的。光有订阅者也会让话题出现在列表里 —— 别把它当故障追。该问题的诊断方法见[运行期排错](/debugging/ego-runtime)。
 :::
 
 ## 5. 第五层：主循环就是一台状态机
@@ -567,9 +569,9 @@ A* 的节点池装不下了。池子在 `planner_manager.cpp:43` 被**硬编码*
 :::
 
 ::: details 4. launch 里传了一个参数，节点却完全没反应，也不报错。为什么？
-因为节点没有 `declare_parameter` 声明这个参数，而 **ROS 2 会静默忽略未声明的参数**。这是 ROS 1 移植到 ROS 2 最阴险的坑：ROS 1 的 `NodeHandle nh("~")` 会自动挂载，ROS 2 取消了这个魔法。
+因为节点没有 `declare_parameter` 声明这个参数，而 **ROS 2 会静默忽略未声明的参数**。这是 ROS 1 移植到 ROS 2 最容易忽略的问题：ROS 1 的 `NodeHandle nh("~")` 会自动挂载，ROS 2 取消了这个魔法。
 
-正确写法看 `ego_replan_fsm.cpp:17-33`：8 个 `declare_parameter` 严格对应 8 个 `get_parameter`。我们真实踩过这个坑，见[运行期排错](/debugging/ego-runtime)。
+正确写法看 `ego_replan_fsm.cpp:17-33`：8 个 `declare_parameter` 严格对应 8 个 `get_parameter`。该问题的诊断方法见[运行期排错](/debugging/ego-runtime)。
 :::
 
 ::: details 5. `execFSMCallback` 第一行为什么要 `exec_timer_->cancel()`？

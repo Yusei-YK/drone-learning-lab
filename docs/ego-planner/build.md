@@ -1,6 +1,8 @@
 # 第二步：编译 EGO-Planner 工作空间
 
 ::: tip 这一页你会得到什么
+本章是课程的构建基础。先理解工作空间的目录和产物，再执行脚本；遇到构建问题时，优先对照每一步的检查命令。
+
 一个编译完成的 ROS 2 工作空间（20 个包全部成功），以及"ROS 2 工程是怎么组织起来的"这套心智模型。
 
 前置：已完成 [第一步：搭环境](/getting-started/environment)，`local/ego-planner-humble:latest` 镜像存在。
@@ -69,11 +71,11 @@ rosdep install --from-paths src --ignore-src -r -y --rosdistro humble \
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
-只有 5 行有效代码，但每一行都是踩过坑之后的结果。
+只有 5 行有效代码，但每一行都是验证和复现之后的结果。
 
 ### 3.1 为什么 `set -u` 在 source 之后
 
-第一行是 `set -eo pipefail`（**没有 `u`**），source 完 ROS 之后才补上 `set -u`。这是个真实踩过的坑。
+第一行是 `set -eo pipefail`（**没有 `u`**），source 完 ROS 之后才补上 `set -u`。这是个真实常见问题。
 
 `set -u` 的意思是"用到未定义的变量就报错退出"，平时是好习惯。但 **ROS 的 `setup.bash` 内部会读一些可能不存在的变量**（比如 `AMENT_TRACE_SETUP_FILES`、`COLCON_TRACE`），在 `set -u` 下会直接把脚本打死，报错还很难懂。可以自己复现一遍【运行验证】：
 
@@ -113,7 +115,7 @@ rosdep install --from-paths src --ignore-src -r -y --rosdistro humble \
 | `--rosdistro humble` | 按 Humble 的依赖表解析 |
 | `--skip-keys "..."` | 跳过这几个解析不了的 key |
 
-### 3.3 `--skip-keys` 是在补上游的坑
+### 3.3 `--skip-keys` 是在补上游兼容性问题
 
 上游的 `package.xml` 里写的是 **CMake 包名**（首字母大写），而 rosdep 认的是**小写的 rosdep key**。比如 `plan_env/package.xml` 里写着：
 
@@ -183,7 +185,7 @@ colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 :::
 
 ::: warning Release 不是可选项
-EGO-Planner 的卖点就是快（单次优化 0.5 ms）。这个数字是 `-O3` 换来的。用 Debug 编译跑这个仿真，你会以为算法很慢——**其实是你的编译选项在骗你**。
+EGO-Planner 的卖点就是快（单次优化 0.5 ms）。这个数字是 `-O3` 换来的。用 Debug 编译跑这个仿真，你会以为算法很慢——**其实是你的编译选项在造成误判**。
 :::
 
 ## 4. 开始编译（两条命令）
@@ -245,7 +247,7 @@ sudo docker exec ego_rviz bash -lc \
 以后遇到"明明改了代码却没生效"，先跑一次 `ros2 pkg prefix <包名>`。如果它指向 `/opt/ros/humble/...` 而不是你的 `install/`，说明 source 顺序错了——**必须先 source ROS，再 source 工作空间**，后 source 的优先级更高。
 :::
 
-## 7. 一个必踩的坑：目录名 ≠ 包名
+## 7. 一个常见问题：目录名 ≠ 包名
 
 对照 `colcon list` 的输出和 `src/` 下的目录名，会发现两处对不上【源码确认】：
 
@@ -333,9 +335,9 @@ ros2 launch ego_planner single_run_in_sim.launch.py use_dynamic:=True
 - 处理：`rosdep` 装依赖 → `colcon build` 逐包 CMake 编译。
 - 输出：`install/setup.bash`，source 它之后 `ros2 pkg list` 才认识这些包。
 
-**卡 2：这次编译的三个坑**
+**卡 2：这次编译的三个问题**
 
-- 一句话理解：坑全在"上游是从 ROS 1 移植过来的"这件事上。
+- 一句话理解：问题主要来自"上游是从 ROS 1 移植过来的"这件事上。
 - 三个关键词：`set -u` 顺序、大写 rosdep key、目录名≠包名。
 - 输入：一份 ROS 1 时代写法残留的源码。
 - 处理：source 前不开 `set -u`；缺的库在 Dockerfile 里按真名装好再 `--skip-keys`；用 `<name>` 而不是目录名找包。

@@ -1,7 +1,7 @@
 # 第五步：装 PX4 SITL + Gazebo + 地面站
 
-::: warning 2026-09-16 运行入口已修复
-本页第 12 节历史起降验收对应 v1.15.4。v1.16.0 已在原厂配置下完成独立起降复验【运行验证】，见第 13 节；日志失控事故处置见[完整记录](/debugging/px4-log-overflow)。修复后的 `run-sitl.sh` 默认无 GUI、会话最长 20 分钟，ULog 和参数仅留在内存中；需要留证时在停止前导出。不要继续使用无日志限额的临时 `docker run` 命令。
+::: tip 本章版本说明
+本页第 12 节历史起降验收对应 v1.15.4。v1.16.0 已在原厂配置下完成独立起降复验【运行验证】，见第 13 节；日志失控运行安全与日志管理见[完整记录](/debugging/px4-log-overflow)。修复后的 `run-sitl.sh` 默认无 GUI、会话最长 20 分钟，ULog 和参数仅留在内存中；需要留证时在停止前导出。建议始终使用仓库提供的脚本，以便复用版本、端口和资源限制。
 :::
 
 ::: tip 这一页你会得到什么
@@ -27,7 +27,7 @@
 | 会不会摔 | 不会 | 会。姿态发散、推力不够、解锁条件不满足都会摔 |
 
 ::: tip 为什么必须过这一关
-真机上你面对的是 MAVLink、飞行模式、解锁条件、offboard 超时这一整套东西，**这些在假飞控里一个都不存在**。SITL 的价值就是让你在不摔真飞机的前提下踩完这些坑。
+真机上你面对的是 MAVLink、飞行模式、解锁条件、offboard 超时这一整套东西，**这些在假飞控里一个都不存在**。SITL 的价值就是让你在不摔真飞机的前提下完成这些飞控基础实验。
 
 记法：**假飞控证明"路规划对了"，PX4 SITL 证明"这架飞机真能这么飞"。**
 :::
@@ -94,7 +94,7 @@ local/ego-planner-humble:latest  4.84GB
 
 三个数字加起来是 16GB，但**磁盘上远没有 16GB**。`docker images` 显示的是"这个镜像从底到顶的总大小"，共享的层被重复计算了。VINS 镜像相对底座只真正多了约 50MB。
 
-::: warning `docker system df` 的 RECLAIMABLE 也会骗你
+::: warning `docker system df` 的 RECLAIMABLE 也会造成误判
 它曾经报告"3.607GB 可回收"，实际执行 `docker image prune -f` 只释放了 **114.6kB**【运行验证】。原因是那些 `<none>` 镜像的层全部和 EGO 镜像共享，删掉标签并不会删掉层。**看到这个数字不要当真，先 prune 一次再看真实变化。**
 :::
 
@@ -184,7 +184,7 @@ fi
 :::
 
 ::: warning 构建时不要用管道接 `tail`
-第一次构建我写成了 `docker build ... | tail -40`，结果**什么输出都没有，镜像也没生成**【运行验证】。管道把输出缓冲吞掉了，失败信息全丢。正确做法是直接重定向到文件：
+第一次构建一种常见写法是 `docker build ... | tail -40`，结果**什么输出都没有，镜像也没生成**【运行验证】。管道把输出缓冲吞掉了，失败信息全丢。正确做法是直接重定向到文件：
 
 ```bash
 sudo docker build -t local/px4-humble:latest . > /tmp/px4-build.log 2>&1
@@ -290,7 +290,7 @@ bash run-sitl.sh build
 
 它起一个一次性容器，在里面执行 `/px4/build-px4.sh`，编完容器自删，产物留在挂载目录里。
 
-### 8.1 本项目真实踩到的坑：一个和 git 毫无关系的 CMake 报错
+### 8.1 常见构建问题：一个和 git 毫无关系的 CMake 报错
 
 第一次编译在配置阶段就死了【运行验证】：
 
@@ -336,7 +336,7 @@ git config --global --add safe.directory '*'
 
 用 `'*'` 而不是逐个列目录，因为 PX4 有几十个子模块，**每一个都是独立的 git 仓库**。这条只在一次性容器里生效，不动宿主机的 git 配置。
 
-::: warning 这个坑会在所有"宿主机挂载 + 容器内 root"的组合里出现
+::: warning 这个问题会在所有"宿主机挂载 + 容器内 root"的组合里出现
 只要满足这三个条件就会中：① 源码在宿主机上，② 用 `-v` 挂进容器，③ 容器里以 root 运行。而这正是本项目所有构建的标准姿势。
 
 **识别特征：** 报错完全不提 git，而是某个变量莫名为空导致的下游错误。以后遇到"版本号是空的"、"`git rev-parse` 返回空"、"CMake 说参数不够"，**先在容器里手跑一次那条 git 命令**。
@@ -374,7 +374,7 @@ chown -R "$HOST_UID:$HOST_GID" /px4/PX4-Autopilot/build
 **这个模式值得记住**：凡是容器往挂载目录里写东西，就在同一个 `docker run` 里顺手把属主改回来。数据集转换那一步用的也是这个招。
 :::
 
-### 8.3 第二个坑：编译中途"静默挂住"，因为编译期要联网
+### 8.3 问题二：编译中途"静默挂住"，因为编译期要联网
 
 第二次编译走到一半就不动了。表现极具误导性【运行验证】：
 
@@ -449,7 +449,7 @@ fi
 :::
 
 ::: warning `timeout` 管不住 `docker run` 里的容器
-测试时我写了 `timeout 25 sudo docker run ...`，结果没有生效【运行验证】。`timeout` 杀掉的是**宿主机上的 docker 客户端**，容器还在后台跑。
+测试时一种常见写法是 `timeout 25 sudo docker run ...`，结果没有生效【运行验证】。`timeout` 杀掉的是**宿主机上的 docker 客户端**，容器还在后台跑。
 
 正确写法是把 `timeout` 放进**容器里面**：
 
@@ -458,7 +458,7 @@ sudo docker run --rm IMAGE bash -lc 'timeout 20 git ls-remote ...'
 ```
 :::
 
-### 8.4 第三个坑：NuttX 子模块没有 tag
+### 8.4 问题三：NuttX 子模块没有 tag
 
 网络修好之后又失败了，而且这次的报错**藏在几百行并行编译输出的中间**。日志末尾只有一句没有信息量的：
 
@@ -535,7 +535,7 @@ git -C platforms/nuttx/NuttX/nuttx fetch --depth 1 origin tag nuttx-12.12.0
 ```
 :::
 
-::: warning 这个坑的通用形态：浅克隆省下的东西，可能正是构建要用的
+::: warning 这个问题的通用形态：浅克隆省下的东西，可能正是构建要用的
 `--depth 1` / `--shallow-submodules` 省时间省流量，代价是**丢掉历史和 tag**。而很多项目的构建系统会用 `git describe` / `git tag` 生成版本号。
 
 **识别特征：构建报错发生在"生成版本头文件"这一步，而且报的是空列表、空字符串、参数不够这类下游错误。** 8.1 那个 `string sub-command REPLACE` 也是同一类——都是"git 取不到东西"伪装成别的错误。
@@ -567,7 +567,7 @@ make -j2 j=2 px4_sitl_default
 
 ### 8.6 编译成功长什么样
 
-三个坑都修完之后，本项目的真实结尾【运行验证】：
+三个问题都修完之后，本项目的真实结尾【运行验证】：
 
 ```
 [438/440] Linking CXX executable bin/px4
@@ -633,7 +633,7 @@ PX4 不用 ROS 话题和外界说话，它用 **MAVLink**——一个跑在 UDP 
 :::
 
 ::: warning 但"PX4 监听哪个端口"是另一个问题，我在这里判断错过
-我曾经想确认 MAVLink 通不通，就在宿主机上查有没有开 14550：
+曾经想确认 MAVLink 通不通，就在宿主机上查有没有开 14550：
 
 ```bash
 ss -lunp | grep -E '145[0-9][0-9]'
@@ -730,7 +730,7 @@ bash install-qgc.sh
 
 QGC 官方发的是 **AppImage**——一个把整个程序打包成单文件的格式。理论上 `chmod +x` 然后双击就能跑。但在 Ubuntu 24.04 上跑不起来。
 
-::: warning AppImage 在 Ubuntu 24.04 上的通用坑：缺 libfuse2
+::: warning AppImage 在 Ubuntu 24.04 上的通用问题：缺 libfuse2
 AppImage 的运行原理是把自己**挂载**成一个临时文件系统，这需要 **libfuse2**。而 Ubuntu 24.04 只带 `fuse3` / `libfuse3-3`，**没有 libfuse2**。
 
 症状是一句很难联想到 fuse 的报错，大意是"无法挂载 AppImage / dlopen libfuse.so.2 失败"。
@@ -1026,7 +1026,7 @@ xhost -local:                                   # 收回 X 访问权限
 
 本节单独验收与真机版本一致的 **PX4 v1.16.0**，链路是「验收程序 → MAVROS → PX4 → Gazebo X500」，QGC 提供地面站连接。它验证飞控起降基线；**尚未接入 EGO、px4ctrl、VINS、Mid360，也不代表真机可以直接起飞**。
 
-【源码确认】本轮 PX4 固定在 `6ea3539157ca358c70a515878b77077af7d4611d`，Gazebo 模型固定在其子模块提交 `e05f4312d3f28aa621157610584a4870406cb6d3`。X500 启动文件已恢复上游内容，保留 `NAV_DLL_ACT=2`，没有通过关闭预检或失联保护来解锁。
+【源码确认】本次实验 PX4 固定在 `6ea3539157ca358c70a515878b77077af7d4611d`，Gazebo 模型固定在其子模块提交 `e05f4312d3f28aa621157610584a4870406cb6d3`。X500 启动文件已恢复上游内容，保留 `NAV_DLL_ACT=2`，没有通过关闭预检或失联保护来解锁。
 
 2812 980KV 是实际电机规格；本节继续使用原厂 X500。仅有 KV 不能确定推力曲线、桨叶、惯量和整机质量，因此不能据此声称模型已经匹配实机【待验证】。
 
@@ -1034,7 +1034,7 @@ xhost -local:                                   # 收回 X 访问权限
 
 【源码确认】[navigator_main.cpp:636](https://github.com/PX4/PX4-Autopilot/blob/6ea3539157ca358c70a515878b77077af7d4611d/src/modules/navigator/navigator_main.cpp#L636) 把起飞指令的 `param7` 作为目标高度；[takeoff.cpp:100](https://github.com/PX4/PX4-Autopilot/blob/6ea3539157ca358c70a515878b77077af7d4611d/src/modules/navigator/takeoff.cpp#L100) 按 **AMSL 海拔**使用它。不是“上升多少米”。同文件第 106 行对非有限值使用「当前海拔 + `MIS_TAKEOFF_ALT`」，第 115 行把低于当前海拔的目标抬到当前高度。
 
-本轮 Python 服务请求把经度、纬度、高度设为 `math.nan`，选用当前位置和默认起飞高度；`MIS_TAKEOFF_ALT` 实测为 `2.5000`【运行验证】。这避开手工混用海拔和离地高度。此前直接填 `altitude: 2.5` 的做法不具有通用正确性；旧失败是否完全由这个参数造成，没有同条件对照实验，不作单一根因断言。
+本次实验 Python 服务请求把经度、纬度、高度设为 `math.nan`，选用当前位置和默认起飞高度；`MIS_TAKEOFF_ALT` 实测为 `2.5000`【运行验证】。这避开手工混用海拔和离地高度。此前直接填 `altitude: 2.5` 的做法不具有通用正确性；旧失败是否完全由这个参数造成，没有同条件对照实验，不作单一根因断言。
 
 【运行验证】还修正了构建缓存中的版本号：原 `build.ninja` 带 `--git_tag 'v0.0.0'`。在 Git 属主检查正确的容器内重新配置 CMake、复用旧目标文件后，仅构建 16 个任务，MAVROS 识别固件为 `011000ff (6ea3539157000000)`。
 
@@ -1055,7 +1055,7 @@ bash environments/px4-humble/accept-flight.sh "$HOME/Documents/Codex/px4-sitl-1.
 2. 在容器里用系统 Python 订阅 MAVROS 状态、EKF 位置、速度及 Gazebo `/world/default/pose/info`，只选 `x500_0` 的模型位姿。
 3. 等待数据新鲜、着陆、未解锁、预检通过且地面站在线，再调用解锁和起飞服务。
 4. 验证实际离地、连续悬停，调用降落服务，再验证自动上锁及落地后 5 秒稳定。
-5. 保存小体积证据，停止并删除本轮容器；只关闭脚本自己启动的 QGC。
+5. 保存小体积证据，停止并删除本次实验容器；只关闭脚本自己启动的 QGC。
 
 Gazebo 默认不弹窗口；这不是没有启动。它的物理位姿直接参与判定。验收程序最多 180 秒，外层进程 190 秒，容器会话 360 秒；运行容器日志每文件 10 MB、保留 2 个，PX4/Gazebo 内存 3 GiB、MAVROS 768 MiB。每个飞行证据文件另限 2 MiB。预检失败会退出并清理，不改安全参数。
 
@@ -1130,7 +1130,7 @@ Gazebo 默认不弹窗口；这不是没有启动。它的物理位姿直接参�
 | offboard 端口 | **14540** | MAVROS 连不上 |
 | 容器网络 | **`--network host`** | QGC 断线 + 编译期 clone 静默挂住 |
 
-**这一页踩过的坑，按"识别特征"记**
+**这一页常见问题，按"识别特征"记**
 
 | 症状 | 真正原因 | 修法 |
 | --- | --- | --- |
@@ -1152,7 +1152,7 @@ Gazebo 默认不弹窗口；这不是没有启动。它的物理位姿直接参�
 ::: details 2. `docker images` 显示三个镜像加起来 16GB，磁盘上真的少了 16GB 吗？
 不是。三个镜像都 `FROM local/ego-planner-humble`，共享的层在磁盘上**只存一份**，但 `docker images` 报的是"从底到顶的总大小"，共享部分被重复计算了。
 
-而且 `docker system df` 的 RECLAIMABLE 也会骗你——它曾报告 3.607GB 可回收，实际 prune 只释放了 114.6kB【运行验证】。**想知道真实变化，prune 一次再对比。**
+而且 `docker system df` 的 RECLAIMABLE 也会造成误判——它曾报告 3.607GB 可回收，实际 prune 只释放了 114.6kB【运行验证】。**想知道真实变化，prune 一次再对比。**
 :::
 
 ::: details 3. 编译卡在某一行不动了。你的第一个动作是什么？
