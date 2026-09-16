@@ -1,0 +1,1380 @@
+{
+  "px4_commit": "6ea3539157ca358c70a515878b77077af7d4611d",
+  "gazebo_models_commit": "e05f4312d3f28aa621157610584a4870406cb6d3",
+  "exit_code": 0,
+  "raw_sha256": "b51da8a68c786ed5382b7db4a45522895878fff1d15a62703510bd44dcaca3de",
+  "samples": [
+    {
+      "t": 0.04,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 0.54,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 1.04,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 1.54,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 2.05,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 2.55,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 3.05,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 3.55,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 4.05,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 4.56,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 5.06,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 5.56,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 6.06,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 6.56,
+      "phase": "ground",
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 7.06,
+      "phase": "ground",
+      "truth_xyz": [
+        -4.534637540794895e-19,
+        -2.7673731336400147e-19,
+        -0.013972865724348527
+      ],
+      "truth_age": 0.017,
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 7.57,
+      "phase": "ground",
+      "truth_xyz": [
+        -6.516726611755045e-19,
+        -3.715204523258517e-19,
+        -0.013472960128207756
+      ],
+      "truth_age": 0.018,
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 8.07,
+      "phase": "ground",
+      "truth_xyz": [
+        -9.071369965422751e-19,
+        -1.1484876011859176e-18,
+        -0.013136851731267163
+      ],
+      "truth_age": 0.02,
+      "armed": false,
+      "connected": false,
+      "mode": ""
+    },
+    {
+      "t": 8.6,
+      "phase": "ground",
+      "truth_xyz": [
+        -1.6078612417656187e-18,
+        -6.969893079564417e-19,
+        -0.013036008352270978
+      ],
+      "truth_age": 0.009,
+      "armed": false,
+      "connected": false,
+      "mode": "",
+      "ekf_z": -0.0006754308706149459,
+      "ekf_vz": -0.001383968279697001,
+      "amsl": NaN,
+      "relative": NaN,
+      "landed_state": 1
+    },
+    {
+      "t": 9.1,
+      "phase": "ground",
+      "truth_xyz": [
+        -1.9075937062620895e-18,
+        -8.988460552944217e-19,
+        -0.013010409215177487
+      ],
+      "truth_age": 0.009,
+      "armed": false,
+      "connected": true,
+      "mode": "CMODE(50593792)",
+      "ekf_z": -0.003970354795455933,
+      "ekf_vz": -0.00041144725400954485,
+      "amsl": 0.24789674580097198,
+      "relative": -0.003056064248085022,
+      "landed_state": 1
+    },
+    {
+      "t": 9.63,
+      "phase": "ground",
+      "truth_xyz": [
+        -2.276164092226965e-18,
+        -5.156129326745408e-19,
+        -0.013003200477228916
+      ],
+      "truth_age": 0.0,
+      "armed": false,
+      "connected": true,
+      "mode": "CMODE(50593792)",
+      "ekf_z": 0.014099061489105225,
+      "ekf_vz": 0.012509430758655071,
+      "amsl": 0.2622499167919159,
+      "relative": 0.011297106742858887,
+      "landed_state": 1
+    },
+    {
+      "t": 10.13,
+      "phase": "ground",
+      "truth_xyz": [
+        -2.6835624011792118e-18,
+        -1.4695184495878723e-19,
+        -0.013001185384295177
+      ],
+      "truth_age": 0.0,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 0.030441105365753174,
+      "ekf_vz": 0.023022247478365898,
+      "amsl": 0.28039780259132385,
+      "relative": 0.029444992542266846,
+      "landed_state": 1
+    },
+    {
+      "t": 10.66,
+      "phase": "ground",
+      "truth_xyz": [
+        -2.6835624011792118e-18,
+        -1.4695184495878723e-19,
+        -0.013001185384295177
+      ],
+      "truth_age": 0.012,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 0.02238363027572632,
+      "ekf_vz": 0.009373887442052364,
+      "amsl": 0.2753417193889618,
+      "relative": -0.005832463502883911,
+      "landed_state": 1
+    },
+    {
+      "t": 11.14,
+      "phase": "ground",
+      "event": "baseline",
+      "ground_z": -0.013000184415735444,
+      "preflight": true,
+      "gcs": true
+    },
+    {
+      "t": 11.14,
+      "phase": "takeoff",
+      "service": "/mavros/cmd/arming",
+      "success": true,
+      "result": 0
+    },
+    {
+      "t": 11.16,
+      "phase": "takeoff",
+      "service": "/mavros/cmd/takeoff",
+      "success": true,
+      "result": 0
+    },
+    {
+      "t": 11.16,
+      "phase": "takeoff",
+      "truth_xyz": [
+        -3.2019145359451337e-18,
+        5.906204581639557e-19,
+        -0.013000184415735444
+      ],
+      "truth_age": 0.017,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 0.006801515817642212,
+      "ekf_vz": -0.0036065136082470417,
+      "amsl": 0.2577543258666992,
+      "relative": -0.0007738173007965088,
+      "landed_state": 1
+    },
+    {
+      "t": 11.7,
+      "phase": "takeoff",
+      "truth_xyz": [
+        -3.2019145359451337e-18,
+        5.906204581639557e-19,
+        -0.013000184415735444
+      ],
+      "truth_age": 0.008,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.010936632752418518,
+      "ekf_vz": -0.014026332646608353,
+      "amsl": 0.24079540371894836,
+      "relative": -0.017732739448547363,
+      "landed_state": 1
+    },
+    {
+      "t": 12.2,
+      "phase": "takeoff",
+      "truth_xyz": [
+        -3.2019145359451337e-18,
+        5.906204581639557e-19,
+        -0.013000184415735444
+      ],
+      "truth_age": 0.009,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": -0.010437101125717163,
+      "ekf_vz": -0.01225963979959488,
+      "amsl": 0.24028362333774567,
+      "relative": -0.01824451982975006,
+      "landed_state": 1
+    },
+    {
+      "t": 12.7,
+      "phase": "takeoff",
+      "truth_xyz": [
+        -3.2019145359451337e-18,
+        5.906204581639557e-19,
+        -0.013000184415735444
+      ],
+      "truth_age": 0.009,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": -0.005412951111793518,
+      "ekf_vz": -0.0077103739604353905,
+      "amsl": 0.24541418254375458,
+      "relative": -0.01311396062374115,
+      "landed_state": 1
+    },
+    {
+      "t": 13.23,
+      "phase": "takeoff",
+      "truth_xyz": [
+        -3.2019145359451337e-18,
+        5.906204581639557e-19,
+        -0.013000184415735444
+      ],
+      "truth_age": 0.001,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": -0.007329985499382019,
+      "ekf_vz": -0.007234480697661638,
+      "amsl": 0.24406427145004272,
+      "relative": -0.0010037273168563843,
+      "landed_state": 3
+    },
+    {
+      "t": 13.73,
+      "phase": "takeoff",
+      "truth_xyz": [
+        -3.2019145359451337e-18,
+        5.906204581639557e-19,
+        -0.013000184415735444
+      ],
+      "truth_age": 0.001,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": -0.012253224849700928,
+      "ekf_vz": -0.008676945231854916,
+      "amsl": 0.2395055890083313,
+      "relative": -0.00556240975856781,
+      "landed_state": 3
+    },
+    {
+      "t": 14.23,
+      "phase": "takeoff",
+      "truth_xyz": [
+        -3.2019145359451337e-18,
+        5.906204581639557e-19,
+        -0.013000184415735444
+      ],
+      "truth_age": 0.001,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": -0.015918835997581482,
+      "ekf_vz": -0.010264089331030846,
+      "amsl": 0.23565393686294556,
+      "relative": -0.009414061903953552,
+      "landed_state": 3
+    },
+    {
+      "t": 14.73,
+      "phase": "takeoff",
+      "truth_xyz": [
+        -3.2019145359451337e-18,
+        5.906204581639557e-19,
+        -0.013000184415735444
+      ],
+      "truth_age": 0.001,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": -0.021036401391029358,
+      "ekf_vz": -0.011129695922136307,
+      "amsl": 0.23082809150218964,
+      "relative": -0.014239907264709473,
+      "landed_state": 3
+    },
+    {
+      "t": 15.23,
+      "phase": "takeoff",
+      "truth_xyz": [
+        -3.2019145359451337e-18,
+        5.906204581639557e-19,
+        -0.013000184415735444
+      ],
+      "truth_age": 0.001,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": -0.0182296484708786,
+      "ekf_vz": -0.008262170478701591,
+      "amsl": 0.23152142763137817,
+      "relative": -0.013546571135520935,
+      "landed_state": 3
+    },
+    {
+      "t": 15.76,
+      "phase": "takeoff",
+      "truth_xyz": [
+        0.001831217256101421,
+        0.003478202070497715,
+        0.03413672186505734
+      ],
+      "truth_age": 0.013,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": 0.04018622636795044,
+      "ekf_vz": 0.24523183703422546,
+      "amsl": 0.26514238119125366,
+      "relative": 0.020074382424354553,
+      "landed_state": 3
+    },
+    {
+      "t": 16.26,
+      "phase": "takeoff",
+      "truth_xyz": [
+        0.01224425114330301,
+        0.011578489579882126,
+        0.27909367704644866
+      ],
+      "truth_age": 0.013,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": 0.33088240027427673,
+      "ekf_vz": 0.6914280652999878,
+      "amsl": 0.5070382356643677,
+      "relative": 0.2619702219963074,
+      "landed_state": 3
+    },
+    {
+      "t": 16.76,
+      "phase": "takeoff",
+      "truth_xyz": [
+        0.02860022773905933,
+        -0.0007645964432323603,
+        0.6504903557956809
+      ],
+      "truth_age": 0.016,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": 0.7524604797363281,
+      "ekf_vz": 0.7245321869850159,
+      "amsl": 1.0034133195877075,
+      "relative": 0.7583453059196472,
+      "landed_state": 3
+    },
+    {
+      "t": 17.26,
+      "phase": "takeoff",
+      "truth_xyz": [
+        0.04520921710061267,
+        -0.02278287013241086,
+        0.9876801354998127
+      ],
+      "truth_age": 0.016,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": 1.0951859951019287,
+      "ekf_vz": 0.7032693028450012,
+      "amsl": 1.351542353630066,
+      "relative": 1.1064742803573608,
+      "landed_state": 3
+    },
+    {
+      "t": 17.76,
+      "phase": "takeoff",
+      "truth_xyz": [
+        0.05356969964273082,
+        -0.03248243095756093,
+        1.3101544693805363
+      ],
+      "truth_age": 0.016,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": 1.4228410720825195,
+      "ekf_vz": 0.6521663665771484,
+      "amsl": 1.673793911933899,
+      "relative": 1.4287258386611938,
+      "landed_state": 3
+    },
+    {
+      "t": 18.26,
+      "phase": "takeoff",
+      "truth_xyz": [
+        0.05499702416787622,
+        -0.022939171977653425,
+        1.6017936521463674
+      ],
+      "truth_age": 0.017,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": 1.71222722530365,
+      "ekf_vz": 0.5728045701980591,
+      "amsl": 1.9631800651550293,
+      "relative": 1.7181119918823242,
+      "landed_state": 3
+    },
+    {
+      "t": 18.8,
+      "phase": "hover",
+      "truth_xyz": [
+        0.0503145395943427,
+        -0.00035546944475753773,
+        1.8179533820953042
+      ],
+      "truth_age": 0.009,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.TAKEOFF",
+      "ekf_z": 1.8999603986740112,
+      "ekf_vz": 0.20694279670715332,
+      "amsl": 2.148002862930298,
+      "relative": 1.9029347896575928,
+      "landed_state": 2
+    },
+    {
+      "t": 19.33,
+      "phase": "hover",
+      "truth_xyz": [
+        0.045531273221241106,
+        0.01517435079319564,
+        1.9177010670457957
+      ],
+      "truth_age": 0.02,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 1.9678741693496704,
+      "ekf_vz": 0.25289079546928406,
+      "amsl": 2.204209089279175,
+      "relative": 1.9591410160064697,
+      "landed_state": 2
+    },
+    {
+      "t": 19.84,
+      "phase": "hover",
+      "truth_xyz": [
+        0.045801387336024756,
+        0.0240821201667193,
+        2.0459557140521976
+      ],
+      "truth_age": 0.009,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.091639757156372,
+      "ekf_vz": 0.22670812904834747,
+      "amsl": 2.3277645111083984,
+      "relative": 2.0826966762542725,
+      "landed_state": 2
+    },
+    {
+      "t": 20.36,
+      "phase": "hover",
+      "truth_xyz": [
+        0.04618764603750951,
+        0.03554405054513502,
+        2.144221456461754
+      ],
+      "truth_age": 0.013,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.188148021697998,
+      "ekf_vz": 0.16733458638191223,
+      "amsl": 2.4257171154022217,
+      "relative": 2.1806492805480957,
+      "landed_state": 2
+    },
+    {
+      "t": 20.86,
+      "phase": "hover",
+      "truth_xyz": [
+        0.04210012915412923,
+        0.04516197354091805,
+        2.2207125166615977
+      ],
+      "truth_age": 0.012,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.249303102493286,
+      "ekf_vz": 0.1377001851797104,
+      "amsl": 2.4889166355133057,
+      "relative": 2.2438488006591797,
+      "landed_state": 2
+    },
+    {
+      "t": 21.36,
+      "phase": "hover",
+      "truth_xyz": [
+        0.03297825021246788,
+        0.046134444536031265,
+        2.2879116870730645
+      ],
+      "truth_age": 0.016,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.3024065494537354,
+      "ekf_vz": 0.115982286632061,
+      "amsl": 2.553359270095825,
+      "relative": 2.308291435241699,
+      "landed_state": 2
+    },
+    {
+      "t": 21.86,
+      "phase": "hover",
+      "truth_xyz": [
+        0.023313703702296202,
+        0.03520885345833412,
+        2.343188193111352
+      ],
+      "truth_age": 0.017,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.350929021835327,
+      "ekf_vz": 0.08746641129255295,
+      "amsl": 2.6025593280792236,
+      "relative": 2.3574914932250977,
+      "landed_state": 2
+    },
+    {
+      "t": 22.4,
+      "phase": "hover",
+      "truth_xyz": [
+        0.016886961240205448,
+        0.02103123777866607,
+        2.3872300922175977
+      ],
+      "truth_age": 0.008,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.398160219192505,
+      "ekf_vz": 0.06181303411722183,
+      "amsl": 2.6465790271759033,
+      "relative": 2.4015111923217773,
+      "landed_state": 2
+    },
+    {
+      "t": 22.9,
+      "phase": "hover",
+      "truth_xyz": [
+        0.012518645229853772,
+        0.004154592637292507,
+        2.4127711547240795
+      ],
+      "truth_age": 0.009,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.4244346618652344,
+      "ekf_vz": 0.04022487252950668,
+      "amsl": 2.674226760864258,
+      "relative": 2.429158926010132,
+      "landed_state": 2
+    },
+    {
+      "t": 23.4,
+      "phase": "hover",
+      "truth_xyz": [
+        0.01026964815554645,
+        -0.012918504123483006,
+        2.432197161841959
+      ],
+      "truth_age": 0.009,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.4408717155456543,
+      "ekf_vz": 0.032595764845609665,
+      "amsl": 2.6905250549316406,
+      "relative": 2.4454572200775146,
+      "landed_state": 2
+    },
+    {
+      "t": 23.93,
+      "phase": "hover",
+      "truth_xyz": [
+        0.010351129986840768,
+        -0.028817832245927617,
+        2.4489601042479707
+      ],
+      "truth_age": 0.021,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.4542958736419678,
+      "ekf_vz": 0.025698723271489143,
+      "amsl": 2.7040183544158936,
+      "relative": 2.4589505195617676,
+      "landed_state": 2
+    },
+    {
+      "t": 24.43,
+      "phase": "hover",
+      "truth_xyz": [
+        0.011143784245396885,
+        -0.03915130364072952,
+        2.4621576939588015
+      ],
+      "truth_age": 0.021,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.466038227081299,
+      "ekf_vz": 0.019163670018315315,
+      "amsl": 2.7165749073028564,
+      "relative": 2.4715070724487305,
+      "landed_state": 2
+    },
+    {
+      "t": 24.93,
+      "phase": "hover",
+      "truth_xyz": [
+        0.006937644660850022,
+        -0.04289400058874688,
+        2.475617658806434
+      ],
+      "truth_age": 0.001,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.459998607635498,
+      "ekf_vz": 0.02344602346420288,
+      "amsl": 2.711603879928589,
+      "relative": 2.466536045074463,
+      "landed_state": 2
+    },
+    {
+      "t": 25.46,
+      "phase": "hover",
+      "truth_xyz": [
+        -0.003841385127848903,
+        -0.034972746751461135,
+        2.4965187606023163
+      ],
+      "truth_age": 0.012,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.468352794647217,
+      "ekf_vz": 0.029493113979697227,
+      "amsl": 2.7166121006011963,
+      "relative": 2.4715442657470703,
+      "landed_state": 2
+    },
+    {
+      "t": 25.96,
+      "phase": "hover",
+      "truth_xyz": [
+        -0.014350580353963967,
+        -0.02173292653171752,
+        2.5136844037832065
+      ],
+      "truth_age": 0.013,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.484567642211914,
+      "ekf_vz": 0.017190031707286835,
+      "amsl": 2.732656478881836,
+      "relative": 2.48758864402771,
+      "landed_state": 2
+    },
+    {
+      "t": 26.46,
+      "phase": "hover",
+      "truth_xyz": [
+        -0.014351279848403635,
+        -0.01371742493856124,
+        2.5236480451785273
+      ],
+      "truth_age": 0.016,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.495429754257202,
+      "ekf_vz": 0.005155435763299465,
+      "amsl": 2.746497392654419,
+      "relative": 2.501429557800293,
+      "landed_state": 2
+    },
+    {
+      "t": 26.96,
+      "phase": "hover",
+      "truth_xyz": [
+        -0.002675386318483135,
+        -0.01581345887601325,
+        2.529130416425749
+      ],
+      "truth_age": 0.017,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.5029349327087402,
+      "ekf_vz": -0.00017269744421355426,
+      "amsl": 2.75388765335083,
+      "relative": 2.508819818496704,
+      "landed_state": 2
+    },
+    {
+      "t": 27.46,
+      "phase": "hover",
+      "truth_xyz": [
+        0.016613737501793787,
+        -0.01759005362716762,
+        2.529899056076037
+      ],
+      "truth_age": 0.017,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.5116829872131348,
+      "ekf_vz": -0.008211962878704071,
+      "amsl": 2.762730360031128,
+      "relative": 2.517662525177002,
+      "landed_state": 2
+    },
+    {
+      "t": 28.0,
+      "phase": "hover",
+      "truth_xyz": [
+        0.03399906509474395,
+        -0.014969046484211245,
+        2.525480991324911
+      ],
+      "truth_age": 0.009,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.5129597187042236,
+      "ekf_vz": -0.012100244872272015,
+      "amsl": 2.764004945755005,
+      "relative": 2.518937110900879,
+      "landed_state": 2
+    },
+    {
+      "t": 28.5,
+      "phase": "hover",
+      "truth_xyz": [
+        0.037642349296762814,
+        -0.017384934368260933,
+        2.5218087527471478
+      ],
+      "truth_age": 0.009,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.50632381439209,
+      "ekf_vz": -0.0069152298383414745,
+      "amsl": 2.757866859436035,
+      "relative": 2.512799024581909,
+      "landed_state": 2
+    },
+    {
+      "t": 28.77,
+      "phase": "hover",
+      "event": "hover_pass",
+      "truth_z_mean": 2.4142653068175255,
+      "truth_z_range": [
+        2.0370875943520588,
+        2.5303433388809107
+      ],
+      "duration": 8.968804653000007
+    },
+    {
+      "t": 28.77,
+      "phase": "land",
+      "service": "/mavros/cmd/land",
+      "success": true,
+      "result": 0
+    },
+    {
+      "t": 29.03,
+      "phase": "land",
+      "truth_xyz": [
+        0.027768185267564697,
+        -0.02940930307667939,
+        2.5138467813909005
+      ],
+      "truth_age": 0.005,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": 2.497727155685425,
+      "ekf_vz": -0.08685269951820374,
+      "amsl": 2.7539565563201904,
+      "relative": 2.5088887214660645,
+      "landed_state": 4
+    },
+    {
+      "t": 29.53,
+      "phase": "land",
+      "truth_xyz": [
+        0.013582567814687859,
+        -0.040140242278894366,
+        2.266520041580747
+      ],
+      "truth_age": 0.006,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": 2.216601848602295,
+      "ekf_vz": -0.7311614751815796,
+      "amsl": 2.5195815563201904,
+      "relative": 2.2745137214660645,
+      "landed_state": 4
+    },
+    {
+      "t": 30.06,
+      "phase": "land",
+      "truth_xyz": [
+        0.007986132690104411,
+        -0.04159684288172107,
+        1.9422246453653056
+      ],
+      "truth_age": 0.017,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": 1.8737064599990845,
+      "ekf_vz": -0.6097842454910278,
+      "amsl": 2.174889326095581,
+      "relative": 1.929821252822876,
+      "landed_state": 4
+    },
+    {
+      "t": 30.56,
+      "phase": "land",
+      "truth_xyz": [
+        0.010222890156874146,
+        -0.034870117016095534,
+        1.6299700613417902
+      ],
+      "truth_age": 0.02,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": 1.5642837285995483,
+      "ekf_vz": -0.6662723422050476,
+      "amsl": 1.8152365684509277,
+      "relative": 1.5701684951782227,
+      "landed_state": 4
+    },
+    {
+      "t": 31.06,
+      "phase": "land",
+      "truth_xyz": [
+        0.015125378404339552,
+        -0.02288251794816219,
+        1.2963857964496983
+      ],
+      "truth_age": 0.021,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": 1.2321206331253052,
+      "ekf_vz": -0.6884987354278564,
+      "amsl": 1.5480481386184692,
+      "relative": 1.3029800653457642,
+      "landed_state": 4
+    },
+    {
+      "t": 31.6,
+      "phase": "land",
+      "truth_xyz": [
+        0.020281181500304245,
+        -0.005978104492292111,
+        0.926645992722454
+      ],
+      "truth_age": 0.012,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": 0.8661558628082275,
+      "ekf_vz": -0.6984221339225769,
+      "amsl": 1.139303207397461,
+      "relative": 0.8942351937294006,
+      "landed_state": 4
+    },
+    {
+      "t": 32.1,
+      "phase": "land",
+      "truth_xyz": [
+        0.02514260398671649,
+        0.010116343584033106,
+        0.5800558145483917
+      ],
+      "truth_age": 0.013,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": 0.5185691118240356,
+      "ekf_vz": -0.7024139761924744,
+      "amsl": 0.7917721271514893,
+      "relative": 0.546704113483429,
+      "landed_state": 4
+    },
+    {
+      "t": 32.6,
+      "phase": "land",
+      "truth_xyz": [
+        0.02425298856896737,
+        0.024516426881981995,
+        0.2309267722623257
+      ],
+      "truth_age": 0.013,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": 0.16749611496925354,
+      "ekf_vz": -0.7037909030914307,
+      "amsl": 0.44128870964050293,
+      "relative": 0.19622071087360382,
+      "landed_state": 4
+    },
+    {
+      "t": 33.1,
+      "phase": "land",
+      "truth_xyz": [
+        0.02407644887662664,
+        0.03438371482303779,
+        -0.013453605426288595
+      ],
+      "truth_age": 0.013,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": -0.07695671916007996,
+      "ekf_vz": -0.003501943778246641,
+      "amsl": 0.1701945960521698,
+      "relative": -0.07487340271472931,
+      "landed_state": 4
+    },
+    {
+      "t": 33.6,
+      "phase": "land",
+      "truth_xyz": [
+        0.02407977527965616,
+        0.034368953687629766,
+        -0.013140032417562064
+      ],
+      "truth_age": 0.013,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": -0.04293835163116455,
+      "ekf_vz": 0.012151570990681648,
+      "amsl": 0.20708966255187988,
+      "relative": -0.037978336215019226,
+      "landed_state": 4
+    },
+    {
+      "t": 34.13,
+      "phase": "land",
+      "truth_xyz": [
+        0.024082449281082146,
+        0.03436172304076224,
+        -0.013036470953734836
+      ],
+      "truth_age": 0.004,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": -0.038103148341178894,
+      "ekf_vz": 0.011242859996855259,
+      "amsl": 0.21240288019180298,
+      "relative": -0.03266511857509613,
+      "landed_state": 4
+    },
+    {
+      "t": 34.63,
+      "phase": "land",
+      "truth_xyz": [
+        0.02408311617280489,
+        0.034359919733879044,
+        -0.013010645903010709
+      ],
+      "truth_age": 0.005,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": -0.03262387216091156,
+      "ekf_vz": 0.012509654276072979,
+      "amsl": 0.2173927128314972,
+      "relative": -0.027675285935401917,
+      "landed_state": 1
+    },
+    {
+      "t": 35.13,
+      "phase": "land",
+      "truth_xyz": [
+        0.024083313023741178,
+        0.034359387442348205,
+        -0.013003023007952336
+      ],
+      "truth_age": 0.005,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": -0.028264358639717102,
+      "ekf_vz": 0.012683202512562275,
+      "amsl": 0.22247371077537537,
+      "relative": -0.022594287991523743,
+      "landed_state": 1
+    },
+    {
+      "t": 35.63,
+      "phase": "land",
+      "truth_xyz": [
+        0.02408336242393966,
+        0.034359253860539625,
+        -0.013001109999773747
+      ],
+      "truth_age": 0.005,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": -0.031491488218307495,
+      "ekf_vz": 0.009722013026475906,
+      "amsl": 0.22005708515644073,
+      "relative": -0.025010913610458374,
+      "landed_state": 1
+    },
+    {
+      "t": 36.16,
+      "phase": "land",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.016,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": -0.03331531584262848,
+      "ekf_vz": 0.007910629734396935,
+      "amsl": 0.21701854467391968,
+      "relative": -0.02804945409297943,
+      "landed_state": 1
+    },
+    {
+      "t": 36.66,
+      "phase": "land",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.016,
+      "armed": true,
+      "connected": true,
+      "mode": "AUTO.LAND",
+      "ekf_z": -0.024551570415496826,
+      "ekf_vz": 0.009484346024692059,
+      "amsl": 0.22496026754379272,
+      "relative": -0.020107731223106384,
+      "landed_state": 1
+    },
+    {
+      "t": 37.16,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.017,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.02613455057144165,
+      "ekf_vz": 0.007356436923146248,
+      "amsl": 0.2265654355287552,
+      "relative": -0.01850256323814392,
+      "landed_state": 1
+    },
+    {
+      "t": 37.66,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.02,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.036744117736816406,
+      "ekf_vz": 0.001972279278561473,
+      "amsl": 0.21406689286231995,
+      "relative": -0.031001105904579163,
+      "landed_state": 1
+    },
+    {
+      "t": 38.16,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.001,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.04301449656486511,
+      "ekf_vz": -0.0003807080502156168,
+      "amsl": 0.2079383134841919,
+      "relative": -0.037129685282707214,
+      "landed_state": 1
+    },
+    {
+      "t": 38.66,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.0,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.048632293939590454,
+      "ekf_vz": -0.002629905240610242,
+      "amsl": 0.20223736763000488,
+      "relative": -0.042830631136894226,
+      "landed_state": 1
+    },
+    {
+      "t": 39.2,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.012,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.04653790593147278,
+      "ekf_vz": -0.0015626564854755998,
+      "amsl": 0.20405536890029907,
+      "relative": -0.04101262986660004,
+      "landed_state": 1
+    },
+    {
+      "t": 39.7,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.013,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.04608964920043945,
+      "ekf_vz": -0.00115362205542624,
+      "amsl": 0.20497900247573853,
+      "relative": -0.040088996291160583,
+      "landed_state": 1
+    },
+    {
+      "t": 40.2,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.013,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.0414695143699646,
+      "ekf_vz": 0.00011615909897955135,
+      "amsl": 0.20896510779857635,
+      "relative": -0.036102890968322754,
+      "landed_state": 1
+    },
+    {
+      "t": 40.73,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.007,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.03206184506416321,
+      "ekf_vz": 0.001426697475835681,
+      "amsl": 0.21718618273735046,
+      "relative": -0.027881816029548645,
+      "landed_state": 1
+    },
+    {
+      "t": 41.23,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.008,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.02149122953414917,
+      "ekf_vz": 0.004671499598771334,
+      "amsl": 0.22887040674686432,
+      "relative": -0.01619759202003479,
+      "landed_state": 1
+    },
+    {
+      "t": 41.73,
+      "phase": "ground_verify",
+      "truth_xyz": [
+        0.02408338181154774,
+        0.03435920143304158,
+        -0.013000359192316152
+      ],
+      "truth_age": 0.008,
+      "armed": false,
+      "connected": true,
+      "mode": "AUTO.LOITER",
+      "ekf_z": -0.016230225563049316,
+      "ekf_vz": 0.005440857727080584,
+      "amsl": 0.2341543585062027,
+      "relative": -0.010913640260696411,
+      "landed_state": 1
+    },
+    {
+      "t": 42.06,
+      "phase": "ground_verify",
+      "event": "PASS",
+      "final_truth_z": -0.013000359192316152,
+      "auto_disarmed": true
+    }
+  ]
+}

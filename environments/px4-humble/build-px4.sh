@@ -56,10 +56,15 @@ else
 fi
 echo
 
-# PX4 的 make 自己会并行，不要再手动加 -j，否则容易把 16 GB 内存吃满。
+# PX4 Makefile 用 j 变量给 Ninja 传 -j。显式限制为 2，不按 32 个逻辑核展开。
 # px4_sitl_default 只编译 SITL 二进制，不启动仿真。
 echo "=== 编译 px4_sitl_default（首次约 5~15 分钟）==="
-make px4_sitl_default
+# 已有缓存也要刷新配置：早先在 Git 属主检查失败时生成的 v0.0.0
+# 会留在 build.ninja 中。复用缓存和全部目标文件，不清理、不全量重编。
+if [[ -f build/px4_sitl_default/CMakeCache.txt ]]; then
+  cmake -S . -B build/px4_sitl_default
+fi
+make -j2 j=2 px4_sitl_default
 
 echo
 echo "=== 验收：二进制是否生成 ==="

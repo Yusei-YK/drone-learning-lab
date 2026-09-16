@@ -10,6 +10,8 @@
 
 三个都能单独跑通了。新增【运行验证】：EGO → px4ctrl 消息适配、实时 MAVROS 定位采样和坐标桥接已通过；【待验证】：px4ctrl 控制器与飞行闭环。详见[闭环接口教程](docs/integration/interfaces.md)。
 
+**2026-09-16 更新【运行验证】：** 日志与资源防护修复后，**PX4 v1.16.0** 已通过原厂 X500 起飞、约 9 秒悬停、降落自动上锁验收，自动脚本退出码 `0`。悬停末 5 秒 Gazebo 真值高度 `2.449～2.530 m`，落地 `-0.013 m`；结束后容器已删除。下表保留 v1.15.4 历史结果，新版复现见 [第 13 节](docs/px4-sitl/environment.md#px4-116-acceptance)。[事故记录](docs/debugging/px4-log-overflow.md)保留此前错误结论的纠正。EGO → px4ctrl 飞行闭环及真机部署仍未验收。
+
 📖 **网页版文档**：部署在 GitHub Pages（地址见仓库 About 栏 / Actions 部署结果）
 
 ## 这个仓库解决什么问题

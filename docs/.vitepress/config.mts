@@ -66,6 +66,7 @@ export default withMermaid(defineConfig({
         text: '调试记录（只写真实踩过的坑）',
         items: [
           { text: '构建期问题', link: '/debugging/docker-build' },
+          { text: 'PX4 日志失控与修复', link: '/debugging/px4-log-overflow' },
           { text: '运行期问题', link: '/debugging/ego-runtime' }
         ]
       },
