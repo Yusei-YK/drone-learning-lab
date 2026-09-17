@@ -1,5 +1,9 @@
 # Drone Learning Lab
 
+本仓库现仅维护学习教材。运行源码、环境构建与仿真验收已独立到 [drone-runtime](https://github.com/Yusei-YK/drone-runtime)，请按新仓库 README 操作。
+
+以下内容及教材中的旧命令保留为拆分前的学习记录，不代表当前运行入口或最新验收状态。历史源码仍可从本仓库 Git 历史查看；不再在本仓库维护 `environments/` 或提交实验日志。
+
 一个新手在 **Ubuntu 24.04 + ROS 2 Humble（容器）** 上，把自主无人机的三个核心部件从零跑通的完整学习记录 —— 包含可复现的环境脚本和中文教学文档。
 
 | 部件 | 回答什么问题 | 状态 |
